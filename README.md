@@ -3,12 +3,12 @@
 ## 一、项目结构
 1. web - 前端项目（React）
     + config-overrieds.js - 配置antd-modile按需加载、调整主题
-    + assets - 
-    + router - 
-    + utils - 
-    + redux - 
-    + components - 
-    + views - 
+    + assets - 公共静态资源
+    + router - 配置路由
+    + utils - 公共函数
+    + redux - 状态管理
+    + components - 公共组件
+    + views - 主组件
     
 2. server - 服务端项目（Express）
 
