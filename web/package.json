@@ -6,12 +6,17 @@
     "antd-mobile": "^2.2.14",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1"
   },
   "scripts": {
+    "start": "react-scripts start",
     "start": "react-app-rewired start",
+    "build": "react-scripts build",
     "build": "react-app-rewired build",
-    "test": "react-app-rewired test",
+    "test": "react-scripts test",
+    "eject": "react-app-rewired eject",
+    "test": "react-scripts test",
     "eject": "react-app-rewired eject",
     "serve": "serve build"
   },
