@@ -7,11 +7,12 @@ import React, { Component } from 'react'
 class Main extends Component {
   constructor(props) {
     super(props)
+    this.state = {}
   }
 
   render() {
     return (
-      <div></div>
+      <div>首页</div>
     );
   }
 }
