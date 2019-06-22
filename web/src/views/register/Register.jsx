@@ -49,9 +49,9 @@ class Register extends Component {
         <Logo></Logo>
         <WingBlank>
           <List>
-            <InputItem onChange={ val => this.handleChange('username', val) }>用户名：</InputItem>
-            <InputItem type="password" onChange={ val => this.handleChange('password', val) }>密码：</InputItem>
-            <InputItem type="password" onChange={ val => this.handleChange('repassword', val) }>确认密码：</InputItem>
+            <InputItem placeholder="请输入用户名" onChange={ val => this.handleChange('username', val) }>用户名：</InputItem>
+            <InputItem type="password" placeholder="请输入密码" onChange={ val => this.handleChange('password', val) }>密码：</InputItem>
+            <InputItem type="password" placeholder="请输入确认密码" onChange={ val => this.handleChange('repassword', val) }>确认密码：</InputItem>
             <List.Item>
               <span>用户类型：</span>
               <Radio checked={ type === '1' } onChange={ () => this.handleChange('type', '1') }>大神</Radio>
