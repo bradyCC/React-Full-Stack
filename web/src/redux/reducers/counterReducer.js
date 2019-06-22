@@ -9,7 +9,6 @@ const defaultState = {
 }
 
 export const counterReducer = (state = defaultState, action) => {
-  console.log('reducers')
   switch(action.type) {
     case FETCH_COUNTER:
       return {

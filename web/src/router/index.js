@@ -4,9 +4,9 @@
 import React from 'react'
 import { HashRouter, Route, Switch } from 'react-router-dom'
 
-import Main from '@/views/Main'
-import Login from '@/views/Login'
-import Register from '@/views/Register'
+import Main from '@/views/main/Main'
+import Login from '@/views/login/Login'
+import Register from '@/views/register/Register'
 
 import { Provider } from 'react-redux'
 import { store } from '../redux/store'
