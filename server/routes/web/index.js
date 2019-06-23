@@ -35,7 +35,7 @@ module.exports = () => {
   });
 
   // 查询用户
-  router.put('/users', async (req, res, next) => {
+  router.put('/users', async (req, res) => {
     if (req.body.id) {
       await User.findById(req.body.id, (err, data) => {
         if (data) {
@@ -50,8 +50,7 @@ module.exports = () => {
             message: '用户不存在'
           });
         }
-
-      })
+      });
     } else {
       await User.find((err, data) => {
         res.send({
@@ -71,6 +70,25 @@ module.exports = () => {
         message: '修改成功'
       });
     });
+  });
+
+  // 删除用户
+  router.delete('/removeUser', async (req, res) => {
+    if (req.body.id) {
+      await User.findByIdAndRemove(req.body.id,(err, data) => {
+        res.send({
+          code: 0,
+          message: '删除成功'
+        })
+      });
+    } else {
+      await User.deleteMany({}, (err, data) => {
+        res.send({
+          code: 0,
+          message: '用户表已清空'
+        })
+      });
+    }
   });
 
   return router;
