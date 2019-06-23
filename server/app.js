@@ -28,7 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/public/uploads', express.static(path.join(__dirname, 'public/uploads'))); // 上传静态资源
 
 // 路由
-app.use('/api/', indexRouter());
+app.use('/web/api/', indexRouter());
 app.use('/', adminRouter());
 app.use('/users', usersRouter());
 

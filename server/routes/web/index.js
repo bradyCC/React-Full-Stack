@@ -8,7 +8,7 @@ const User = require('../../models/User');
 module.exports = () => {
   const router = express.Router();
 
-  /* GET users listing. */
+  /* get users listing. */
   router.get('/', async (req, res) => {
     res.send({
       code: 0,
@@ -44,12 +44,12 @@ module.exports = () => {
     const {username, password } = req.body;
 
     // 1.验证用户名
-    if (!username) return next(createError(422, '请输入用户名'));
+    // if (!username) return next(createError(422, '请输入用户名'));
     const user = await User.findOne({username}).select('+password');
     if (!user) return next(createError(422, '用户不存在'));
 
     // 2.验证密码
-    if (!password) return next(createError(422, '请输入密码'));
+    // if (!password) return next(createError(422, '请输入密码'));
     const isValid = require('bcrypt').compareSync(password, user.password);
     if (!isValid) return next(createError(422, '密码错误'));
 

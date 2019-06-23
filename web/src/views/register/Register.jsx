@@ -4,7 +4,7 @@
 import React, {Component} from 'react'
 import { NavBar, WingBlank, WhiteSpace, List, InputItem, Radio, Button, Toast } from 'antd-mobile'
 import Logo from '@/components/logo/Logo'
-
+import { validata } from '@/utils/validata'
 
 class Register extends Component {
   constructor(props) {
@@ -27,13 +27,32 @@ class Register extends Component {
 
   // 注册提交
   submit = () => {
+    // 验证
+    let validataArr = [
+      {'val': this.state.username, 'type': 'isnull', 'name': '用户名'},
+      {'val': this.state.password, 'type': 'isnull', 'name': '密码'},
+      {'val': this.state.repassword, 'type': 'isnull', 'name': '确认密码'},
+      {'val': this.state.type, 'type': 'isnull', 'name': '用户类型'},
+    ]
+    if (!validata(validataArr)) return false
+    if (this.state.password !== this.state.repassword) {
+      Toast.fail('两次密码输入不一致，请重新输入')
+      return false
+    }
+
+    // 开启遮罩
     Toast.loading('注册中', 0)
-
-    console.log(this.state)
-
-    setTimeout(() => {
+    // 提交数据
+    this.$http.post('register', this.state).then(res => {
+      // 关闭遮罩
       Toast.hide()
-    }, 5000)
+
+      if (res.data.code === 0) {
+        Toast.success('注册成功', 3, () => {
+          this.props.history.push('/login')
+        })
+      }
+    })
   }
 
   // 已有账户，跳转至登录页
@@ -45,7 +64,7 @@ class Register extends Component {
     const { type } = this.state
     return (
       <div>
-        <NavBar>硅谷直聘</NavBar>
+        <NavBar>直聘App</NavBar>
         <Logo></Logo>
         <WingBlank>
           <List>

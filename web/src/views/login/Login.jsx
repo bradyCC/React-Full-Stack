@@ -5,6 +5,7 @@
 import React, {Component} from 'react'
 import { NavBar, WingBlank, WhiteSpace, List, InputItem, Button, Toast } from 'antd-mobile'
 import Logo from '@/components/logo/Logo'
+import { validata } from '@/utils/validata'
 
 class Login extends Component {
   constructor(props) {
@@ -25,13 +26,26 @@ class Login extends Component {
 
   // 登录
   submit = () => {
+    // 验证
+    let validataArr = [
+      {'val': this.state.username, 'type': 'isnull', 'name': '用户名'},
+      {'val': this.state.password, 'type': 'isnull', 'name': '密码'},
+    ]
+    if (!validata(validataArr)) return false
+
+    // 开启遮罩
     Toast.loading('登录中', 0)
-
-    console.log(this.state)
-
-    setTimeout(() => {
+    // 提交数据
+    this.$http.post('login', this.state).then(res => {
+      // 关闭遮罩
       Toast.hide()
-    }, 5000)
+      if (res.data.code === 0) {
+        Toast.success('登录成功', 3, () => {
+          localStorage.token = res.data.token
+          this.props.history.push('/main')
+        })
+      }
+    })
   }
 
   // 已有账户，跳转至注册页
@@ -42,7 +56,7 @@ class Login extends Component {
   render() {
     return (
       <div>
-        <NavBar>硅谷直聘</NavBar>
+        <NavBar>直聘App</NavBar>
         <Logo></Logo>
         <WingBlank>
           <List>
