@@ -14,6 +14,7 @@ const app = express();
 
 app.use(cors()); // 处理跨域
 require('./plugins/db')(app); // 连接数据库
+app.set('secret', 'qwert'); // 用于生成token
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
