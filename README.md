@@ -13,7 +13,9 @@
 npm install eject - 暴露webpack配置    
     
 2. server - 服务端项目（Express）
-
+    + res.send()
+    + res.json()
+    + res.sendfile()
 
 ## 二、相关资料
 [React](https://reactjs.org/)
