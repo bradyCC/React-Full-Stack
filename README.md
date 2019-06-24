@@ -10,8 +10,9 @@
     + components - 公共组件
     + views - 主组件
     
+npm install eject - 暴露webpack配置    
+    
 2. server - 服务端项目（Express）
-
 
 
 ## 二、相关资料
