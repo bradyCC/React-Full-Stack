@@ -17,7 +17,7 @@ const AppRouter = () => (
       <Switch>
         <Route path="/login" component={ Login }></Route>
         <Route path="/register" component={ Register }></Route>
-        <Route component={ Main }></Route>
+        <Route exact component={ Main }></Route>
       </Switch>
     </HashRouter>
   </Provider>
