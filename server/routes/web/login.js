@@ -30,6 +30,7 @@ module.exports = () => {
       code: 0,
       message: '登录成功',
       username,
+      type: user.type,
       token
     });
   });

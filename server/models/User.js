@@ -18,7 +18,7 @@ const schema = new mongoose.Schema({
   post: { type: String }, // 职位
   info: { type: String }, // 简介
   company: { type: String }, // 公司名称
-  salary: { type: String } // 月薪
+  salary: { type: String }, // 月薪
 });
 
 module.exports = mongoose.model('User', schema, 'users');

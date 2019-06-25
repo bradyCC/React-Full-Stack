@@ -74,8 +74,8 @@ class Login extends Component {
         <Logo></Logo>
         <WingBlank>
           <List>
-            <InputItem placeholder="请输入用户名" onChange={ val => this.handleChange('username', val) }>用户名：</InputItem>
-            <InputItem type="password" placeholder="请输入密码" onChange={ val => this.handleChange('password', val) }>密码：</InputItem>
+            <InputItem placeholder="请输入用户名" onChange={ val => this.handleChange('username', val) }>用户名</InputItem>
+            <InputItem type="password" placeholder="请输入密码" onChange={ val => this.handleChange('password', val) }>密码</InputItem>
           </List>
           <WhiteSpace></WhiteSpace>
           <Button type="primary" onClick={this.submit}>登录</Button>
