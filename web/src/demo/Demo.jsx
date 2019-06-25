@@ -4,6 +4,7 @@
 
 import React, {Component} from 'react'
 import SubDemo from './SubDemo'
+import ReduxDemo from './ReduxDemo'
 
 class Demo extends Component {
   constructor(props) {
@@ -76,6 +77,9 @@ class Demo extends Component {
 
         {/*父子组件传参*/}
         <SubDemo name={ this.state.name } list={ this.state.list }></SubDemo>
+
+        {/*redux状态管理*/}
+        <ReduxDemo></ReduxDemo>
       </div>
     )
   }

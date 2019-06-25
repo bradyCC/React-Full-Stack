@@ -1,7 +1,6 @@
 /**
  * Created by brady on 2019-06-22.
  */
-
 import { FETCH_COUNTER } from "../actionTypes"
 
 const defaultState = {
