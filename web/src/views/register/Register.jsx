@@ -13,7 +13,7 @@ class Register extends Component {
       username: '', // 用户名
       password: '', // 密码
       repassword: '', // 确认密码
-      type: '1', // 用户类型
+      type: '', // 用户类型
     }
   }
 
@@ -40,15 +40,10 @@ class Register extends Component {
       return false
     }
 
-    // 开启遮罩
-    Toast.loading('注册中', 0)
     // 提交数据
     this.$http.post('register', this.state).then(res => {
-      // 关闭遮罩
-      Toast.hide()
-
       if (res.data.code === 0) {
-        Toast.success('注册成功', 3, () => {
+        Toast.success('注册成功', 1, () => {
           this.props.history.push('/login')
         })
       }
@@ -68,14 +63,16 @@ class Register extends Component {
         <Logo></Logo>
         <WingBlank>
           <List>
-            <InputItem placeholder="请输入用户名" onChange={ val => this.handleChange('username', val) }>用户名：</InputItem>
-            <InputItem type="password" placeholder="请输入密码" onChange={ val => this.handleChange('password', val) }>密码：</InputItem>
-            <InputItem type="password" placeholder="请输入确认密码" onChange={ val => this.handleChange('repassword', val) }>确认密码：</InputItem>
-            <List.Item>
-              <span>用户类型：</span>
-              <Radio checked={ type === '1' } onChange={ () => this.handleChange('type', '1') }>大神</Radio>
-              <Radio checked={ type === '2' } onChange={ () => this.handleChange('type', '2') } style={{'marginLeft': '15px'}}>老板</Radio>
-            </List.Item>
+            <InputItem placeholder="请输入用户名" onChange={ val => this.handleChange('username', val) }>用户名</InputItem>
+            <InputItem type="password" placeholder="请输入密码" onChange={ val => this.handleChange('password', val) }>密码</InputItem>
+            <InputItem type="password" placeholder="请输入确认密码" onChange={ val => this.handleChange('repassword', val) }>确认密码</InputItem>
+            {/*<List.Item>*/}
+            {/*  <span>用户类型：</span>*/}
+            {/*  <Radio checked={ type === '1' } onChange={ () => this.handleChange('type', '1') }>大神</Radio>*/}
+            {/*  <Radio checked={ type === '2' } onChange={ () => this.handleChange('type', '2') } style={{'marginLeft': '15px'}}>老板</Radio>*/}
+            {/*</List.Item>*/}
+            <Radio.RadioItem checked={ type === '1'} onChange={ () => this.handleChange('type', '1') }>大神</Radio.RadioItem>
+            <Radio.RadioItem checked={ type === '2'} onChange={ () => this.handleChange('type', '2') }>老板</Radio.RadioItem>
           </List>
           <WhiteSpace></WhiteSpace>
           <Button type="primary" onClick={this.submit}>注册</Button>
