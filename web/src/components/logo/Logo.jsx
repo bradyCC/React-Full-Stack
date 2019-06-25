@@ -12,7 +12,7 @@ class Logo extends Component {
       <div className="logo">
         <img src={logo} alt="" className="logo-img" />
       </div>
-    );
+    )
   }
 }
 

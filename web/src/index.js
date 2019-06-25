@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import AppRouter from '@/router/index'
-import http from '@/utils/http'
+import AppRouter from './router/index'
+import http from './utils/http'
 
 import * as serviceWorker from './serviceWorker';
 

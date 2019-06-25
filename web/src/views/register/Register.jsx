@@ -3,8 +3,8 @@
  */
 import React, {Component} from 'react'
 import { NavBar, WingBlank, WhiteSpace, List, InputItem, Radio, Button, Toast } from 'antd-mobile'
-import Logo from '@/components/logo/Logo'
-import { validata } from '@/utils/validata'
+import Logo from '../../components/logo/Logo'
+import { validata } from '../../utils/validata'
 
 class Register extends Component {
   constructor(props) {
