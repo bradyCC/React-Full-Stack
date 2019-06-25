@@ -9,6 +9,8 @@ import Demo from '../demo/Demo'
 import Main from '../views/main/Main'
 import Login from '../views/login/Login'
 import Register from '../views/register/Register'
+import UserInfo from '../views/userInfo/UserInfo'
+import BossInfo from '../views/bossInfo/BossInfo'
 
 import { Provider } from 'react-redux'
 import { store } from '../redux/store'
@@ -19,6 +21,8 @@ const AppRouter = () => (
       <Switch>
         <Route path="/login" component={ Login }></Route>
         <Route path="/register" component={ Register }></Route>
+        <Route path="/userinfo" component={ UserInfo }></Route>
+        <Route path="/bossinfo" component={ BossInfo }></Route>
         <Route path="/demo" component={ Demo }></Route>
         <Route excat component={ Main }></Route>
       </Switch>

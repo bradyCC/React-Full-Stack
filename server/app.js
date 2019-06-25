@@ -7,6 +7,10 @@ const logger = require('morgan');
 const cors = require('cors');
 
 const indexRouter = require('./routes/web');
+const loginRouter = require('./routes/web/login');
+const registerRouter = require('./routes/web/register');
+const uploadRouter = require('./routes/web/upload');
+
 const adminRouter = require('./routes/admin');
 const usersRouter = require('./routes/admin/users');
 
@@ -27,8 +31,22 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/public/uploads', express.static(path.join(__dirname, 'public/uploads'))); // 上传静态资源
 
-// 路由
-app.use('/web/api/', indexRouter());
+// 登录校验中间件
+const authMiddleware = require('./middleware/auth');
+
+// 资源中间件
+const resourceMiddleware = require('./middleware/resource')
+
+// 前端路由
+app.use('/web/api/rest/:resource', authMiddleware(), resourceMiddleware(), indexRouter());
+// 登录路由
+app.use('/web/api/login', loginRouter());
+// 注册路由
+app.use('/web/api/register', registerRouter());
+// 上传文件路由
+app.use('/web/api/upload', authMiddleware(), uploadRouter());
+
+// 管理后台路由
 app.use('/', adminRouter());
 app.use('/users', usersRouter());
 
