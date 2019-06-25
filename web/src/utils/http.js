@@ -11,6 +11,7 @@ const http = axios.create({
 
 // axios 请求头
 http.interceptors.request.use(config => {
+  Toast.loading('提交中')
   if (localStorage.token) {
     config.headers.Authorization = 'Bearer ' + localStorage.token
   }
@@ -21,6 +22,7 @@ http.interceptors.request.use(config => {
 
 // axios 拦截器
 http.interceptors.response.use(res => {
+  Toast.hide()
   console.log(res.data)
   if (res.status === 200 && res.data.code === 11000) {
     Toast.fail('用户名已存在，请重新输入')

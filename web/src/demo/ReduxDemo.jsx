@@ -15,7 +15,6 @@ const mapStateToProps = state => ({
 
 // 装饰器
 @connect(mapStateToProps, { demoAction: demoAction })
-
 class ReduxDemo extends Component {
   constructor(props) {
     super(props)

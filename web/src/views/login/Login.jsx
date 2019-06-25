@@ -7,6 +7,17 @@ import { NavBar, WingBlank, WhiteSpace, List, InputItem, Button, Toast } from 'a
 import Logo from '../../components/logo/Logo'
 import { validata } from '../../utils/validata'
 
+import { connect } from 'react-redux'
+import { authAction } from '../../redux/actions/authAction'
+
+// 关联
+const mapStateToProps = state => ({
+  isAuth: state.authReducer.isAuth,
+  username: state.authReducer.username
+})
+
+// 装饰器
+@connect(mapStateToProps, { authAction: authAction })
 class Login extends Component {
   constructor(props) {
     super(props)
@@ -33,19 +44,22 @@ class Login extends Component {
     ]
     if (!validata(validataArr)) return false
 
-    // 开启遮罩
-    Toast.loading('登录中', 0)
-    // 提交数据
-    this.$http.post('login', this.state).then(res => {
-      // 关闭遮罩
-      Toast.hide()
-      if (res.data.code === 0) {
-        Toast.success('登录成功', 3, () => {
-          localStorage.token = res.data.token
-          this.props.history.push('/main')
-        })
-      }
-    })
+    this.props.authAction('LOGIN', this.state)
+
+    // // 开启遮罩
+    // Toast.loading('登录中', 0)
+    // // 提交数据
+    // this.$http.post('login', this.state)
+    //   .then(res => {
+    //   // 关闭遮罩
+    //   Toast.hide()
+    //   if (res.data.code === 0) {
+    //     Toast.success('登录成功', 3, () => {
+    //       localStorage.token = res.data.token
+    //       this.props.history.push('/main')
+    //     })
+    //   }
+    // })
   }
 
   // 已有账户，跳转至注册页

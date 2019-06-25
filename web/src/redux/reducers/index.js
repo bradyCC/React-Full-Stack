@@ -6,7 +6,10 @@ import { combineReducers } from 'redux'
 import { demoReducer } from './demoReducer'
 import { counterReducer } from './counterReducer'
 
+import { authReducer } from './authReducer'
+
 export default combineReducers({
   demoReducer,
   counterReducer,
+  authReducer,
 })
