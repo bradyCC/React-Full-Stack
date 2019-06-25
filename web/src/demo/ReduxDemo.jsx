@@ -8,11 +8,14 @@ import { WingBlank, WhiteSpace, Toast, Button } from 'antd-mobile'
 import { connect } from 'react-redux'
 import { demoAction } from '../redux/actions/demoAction'
 
+// 关联
 const mapStateToProps = state => ({
   count: state.demoReducer.count
 })
 
+// 装饰器
 @connect(mapStateToProps, { demoAction: demoAction })
+
 class ReduxDemo extends Component {
   constructor(props) {
     super(props)
@@ -32,9 +35,7 @@ class ReduxDemo extends Component {
   componentWillReceiveProps(nextProps, nextContext) {
     // console.log(this.props)
     // console.log(nextProps)
-    setTimeout(() => {
-      Toast.hide()
-    }, 2000)
+    setTimeout(() => { Toast.hide() }, 2000)
   }
 
   render() {

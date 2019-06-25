@@ -6,6 +6,8 @@ import React, {Component} from 'react'
 import SubDemo from './SubDemo'
 import ReduxDemo from './ReduxDemo'
 
+import './demo.css'
+
 class Demo extends Component {
   constructor(props) {
     super(props)
