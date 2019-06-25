@@ -3,7 +3,7 @@
  */
 
 import React, {Component} from 'react'
-import { InputItem, TextareaItem, Button } from 'antd-mobile'
+import { WhiteSpace, InputItem, TextareaItem, Button } from 'antd-mobile'
 
 class BossInfo extends Component {
   constructor(props) {
@@ -33,7 +33,7 @@ class BossInfo extends Component {
         <InputItem placeholder="请输入公司名称" onChange={ val => this.handleChange('company', val) }>公司名称</InputItem>
         <InputItem placeholder="请输入职位薪资" onChange={ val => this.handleChange('salary', val) }>职位薪资</InputItem>
         <TextareaItem placeholder="请输入职位要求" title="职位要求" rows={3} onChange={ val => this.handleChange('info', val) }></TextareaItem>
-
+        <WhiteSpace></WhiteSpace>
         <Button type="primary">保存</Button>
       </div>
     );
