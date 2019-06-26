@@ -12,9 +12,10 @@ class SelectAvatar extends Component {
     super(props)
     this.avatarList = []
     this.state = {
-      header: ''
+      header: '' // 头像
     }
 
+    // 生成头像列表
     for (let i = 0; i < 16; i ++) {
       this.avatarList.push({
         text: `头像${i+1}`,
@@ -27,6 +28,9 @@ class SelectAvatar extends Component {
   selectAvatar = (el) => {
     this.setState({
       header: el.icon
+    }, () => {
+      this.props.selectAvatar(el.text)
+      // this.props.selectAvatar(this.state.header)
     })
   }
 
@@ -47,7 +51,7 @@ class SelectAvatar extends Component {
 }
 
 SelectAvatar.propTypes = {
-  selectAvatar: PropTypes.func.isRequired
+  selectAvatar: PropTypes.func.isRequired,
 }
 
 export default SelectAvatar

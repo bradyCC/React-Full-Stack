@@ -19,10 +19,10 @@ class BossInfo extends Component {
     }
   }
 
-  // 选择头像
+  // 设置头像
   selectAvatar = (header) => {
     this.setState({
-
+      header
     })
   }
 
