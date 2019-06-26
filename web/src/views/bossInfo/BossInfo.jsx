@@ -4,6 +4,7 @@
 
 import React, {Component} from 'react'
 import { WhiteSpace, InputItem, TextareaItem, Button } from 'antd-mobile'
+import SelectAvatar from '../../components/selectavatar/SelectAvatar'
 
 class BossInfo extends Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class BossInfo extends Component {
   render() {
     return (
       <div>
-        <p>bossinfo</p>
+        <SelectAvatar></SelectAvatar>
         <InputItem placeholder="请输入招聘职位" onChange={ val => this.handleChange('post', val) }>招聘职位</InputItem>
         <InputItem placeholder="请输入公司名称" onChange={ val => this.handleChange('company', val) }>公司名称</InputItem>
         <InputItem placeholder="请输入职位薪资" onChange={ val => this.handleChange('salary', val) }>职位薪资</InputItem>

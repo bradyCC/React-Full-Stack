@@ -13,24 +13,12 @@ class Main extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      title: `首页`
+      title: ``
     }
   }
 
-  render() {
-    return (
-      <div>
-        <NavBar>{ this.state.title }</NavBar>
-        <Switch>
-          <Route path="/bossinfo" component={ BossInfo }></Route>
-          <Route path="/userinfo" component={ UserInfo }></Route>
-        </Switch>
-      </div>
-    );
-  }
-
-  componentWillReceiveProps(nextProps, nextContext) {
-    let pathname = nextProps.location.pathname.slice(1)
+  getTitle = (props) => {
+    let pathname = props.location.pathname.slice(1)
     switch (pathname) {
       case 'bossinfo':
         this.setState({
@@ -48,6 +36,26 @@ class Main extends Component {
         })
         break
     }
+  }
+
+  render() {
+    return (
+      <div>
+        <NavBar>{ this.state.title }</NavBar>
+        <Switch>
+          <Route path="/bossinfo" component={ BossInfo }></Route>
+          <Route path="/userinfo" component={ UserInfo }></Route>
+        </Switch>
+      </div>
+    );
+  }
+
+  componentDidMount() {
+    this.getTitle(this.props)
+  }
+
+  componentWillReceiveProps(nextProps, nextContext) {
+    this.getTitle(nextProps)
   }
 
 }
