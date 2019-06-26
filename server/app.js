@@ -35,7 +35,7 @@ app.use('/public/uploads', express.static(path.join(__dirname, 'public/uploads')
 const authMiddleware = require('./middleware/auth');
 
 // 资源中间件
-const resourceMiddleware = require('./middleware/resource')
+const resourceMiddleware = require('./middleware/resource');
 
 // 前端路由
 app.use('/web/api/rest/:resource', authMiddleware(), resourceMiddleware(), indexRouter());

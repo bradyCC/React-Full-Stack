@@ -78,9 +78,9 @@ class Login extends Component {
             <InputItem type="password" placeholder="请输入密码" onChange={ val => this.handleChange('password', val) }>密码</InputItem>
           </List>
           <WhiteSpace></WhiteSpace>
-          <Button type="primary" onClick={this.submit}>登录</Button>
+          <Button type="primary" onClick={ this.submit }>登录</Button>
           <WhiteSpace></WhiteSpace>
-          <Button onClick={this.toRegister}>注册账户</Button>
+          <Button onClick={ this.toRegister }>注册账户</Button>
         </WingBlank>
       </div>
     );

@@ -75,9 +75,9 @@ class Register extends Component {
             <Radio.RadioItem checked={ type === '2'} onChange={ () => this.handleChange('type', '2') }>老板</Radio.RadioItem>
           </List>
           <WhiteSpace></WhiteSpace>
-          <Button type="primary" onClick={this.submit}>注册</Button>
+          <Button type="primary" onClick={ this.submit }>注册</Button>
           <WhiteSpace></WhiteSpace>
-          <Button onClick={this.toLogin}>已有账户</Button>
+          <Button onClick={ this.toLogin }>已有账户</Button>
         </WingBlank>
       </div>
     );

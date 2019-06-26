@@ -4,12 +4,16 @@
 
 import React, {Component} from 'react'
 import { List, Grid } from 'antd-mobile';
+import PropTypes from 'prop-types'
+import './selectavatar.less'
 
 class SelectAvatar extends Component {
   constructor(props) {
     super(props)
     this.avatarList = []
-    this.state = {}
+    this.state = {
+      header: ''
+    }
 
     for (let i = 0; i < 16; i ++) {
       this.avatarList.push({
@@ -19,17 +23,31 @@ class SelectAvatar extends Component {
     }
   }
 
+  // 选择头像
+  selectAvatar = (el) => {
+    this.setState({
+      header: el.icon
+    })
+  }
 
   render() {
-    const listHeader = '请选择头像'
     return (
       <div>
-        <List renderHeader={ () => listHeader }></List>
-        <Grid data={ this.avatarList } columnNum={4}></Grid>
+        <List renderHeader={ () => !this.state.header? '请选择头像': (
+          <div class="avatar-div">
+            <span>您选择的头像是：</span>
+            <img src={ this.state.header } alt="" className="select-avatar" />
+          </div>
+        ) }></List>
+        <Grid data={ this.avatarList } columnNum={4} onClick={ (el) => this.selectAvatar(el)}></Grid>
       </div>
     )
   }
 
+}
+
+SelectAvatar.propTypes = {
+  selectAvatar: PropTypes.func.isRequired
 }
 
 export default SelectAvatar

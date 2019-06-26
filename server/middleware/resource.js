@@ -7,7 +7,7 @@ module.exports = options => {
 
   return (req, res, next) => {
     // 获取参数大写类名
-    const modelName = inflection.classify(req.params.resourse);
+    const modelName = inflection.classify(req.params.resource);
     // 获取Model模型
     req.Model = require(`../models/${modelName}`);
 
