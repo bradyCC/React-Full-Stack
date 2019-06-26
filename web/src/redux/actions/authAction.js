@@ -9,13 +9,26 @@ import { Toast } from 'antd-mobile'
 export let authAction = (type = LOGIN, data) => {
   return (dispatch) => {
     http.post('login', data).then(data => {
-      if (data.data.code === 0) {
-        dispatch({ type: type, payload: data.data })
-        Toast.success('登录成功', 1, () => {
-          localStorage.token = data.data.token
+      dispatch({ type: type, payload: data.data })
+      Toast.success(data.data.message, 2, () => {
+        localStorage.token = data.data.token
+        // 首次登陆，跳转到完善资料
+        if (!data.data.header) {
+          switch (data.data.type) {
+            case '1':
+              createHashHistory().push('/bossinfo')
+              break
+            case '2':
+              createHashHistory().push('/userinfo')
+              break
+            default:
+              break
+          }
+        // 完善资料后，再次登陆，跳转到首页
+        } else {
           createHashHistory().push('/main')
-        })
-      }
+        }
+      })
     })
   }
 }

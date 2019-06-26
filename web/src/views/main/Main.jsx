@@ -4,7 +4,7 @@
 
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
-import { NavBar } from 'antd-mobile'
+import { NavBar, Icon } from 'antd-mobile'
 
 import BossInfo from '../bossInfo/BossInfo'
 import UserInfo from '../userInfo/UserInfo'
@@ -17,6 +17,7 @@ class Main extends Component {
     }
   }
 
+  // 动态设置title
   getTitle = (props) => {
     let pathname = props.location.pathname.slice(1)
     switch (pathname) {
@@ -38,10 +39,17 @@ class Main extends Component {
     }
   }
 
+  // 返回
+  goBack = () => {
+    this.props.history.go(-1)
+  }
+
   render() {
     return (
       <div>
-        <NavBar>{ this.state.title }</NavBar>
+        <NavBar
+          icon={ this.state.title !== '首页'? <Icon type="left" />: ''}
+          onLeftClick={ () => this.goBack() }>{ this.state.title }</NavBar>
         <Switch>
           <Route path="/bossinfo" component={ BossInfo }></Route>
           <Route path="/userinfo" component={ UserInfo }></Route>

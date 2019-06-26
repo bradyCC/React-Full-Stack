@@ -38,7 +38,7 @@ class SelectAvatar extends Component {
     return (
       <div>
         <List renderHeader={ () => !this.state.header? '请选择头像': (
-          <div class="avatar-div">
+          <div className="avatar-div">
             <span>您选择的头像是：</span>
             <img src={ this.state.header } alt="" className="select-avatar" />
           </div>

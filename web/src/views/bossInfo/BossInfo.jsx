@@ -2,10 +2,10 @@
  * Created by brady on 2019-06-25.
  */
 
-import React, {Component} from 'react'
-import { WhiteSpace, InputItem, TextareaItem, Button } from 'antd-mobile'
+import React, { Component } from 'react'
+import { WhiteSpace, InputItem, TextareaItem, Button, Toast } from 'antd-mobile'
 import SelectAvatar from '../../components/selectavatar/SelectAvatar'
-import {validata} from "../../utils/validata";
+import { validata } from "../../utils/validata";
 
 class BossInfo extends Component {
   constructor(props) {
@@ -46,8 +46,11 @@ class BossInfo extends Component {
     ]
     if (!validata(validataArr)) return false
 
-    this.$http.put('rest/users', this.state).then(res => {
-
+    this.$http.put('rest/users', this.state)
+      .then(res => {
+        Toast.success(res.data.message, 2, () => {
+          this.props.history.push('/main')
+        })
     })
   }
 

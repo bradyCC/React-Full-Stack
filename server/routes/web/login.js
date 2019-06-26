@@ -31,6 +31,7 @@ module.exports = () => {
       message: '登录成功',
       username,
       type: user.type,
+      header: user.header,
       token
     });
   });
