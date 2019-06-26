@@ -68,11 +68,11 @@ class Register extends Component {
             <InputItem type="password" placeholder="请输入确认密码" onChange={ val => this.handleChange('repassword', val) }>确认密码</InputItem>
             {/*<List.Item>*/}
             {/*  <span>用户类型：</span>*/}
-            {/*  <Radio checked={ type === '1' } onChange={ () => this.handleChange('type', '1') }>大神</Radio>*/}
-            {/*  <Radio checked={ type === '2' } onChange={ () => this.handleChange('type', '2') } style={{'marginLeft': '15px'}}>老板</Radio>*/}
+            {/*  <Radio checked={ type === '1' } onChange={ () => this.handleChange('type', '1') } style={{'marginLeft': '15px'}}>老板</Radio>*/}
+            {/*  <Radio checked={ type === '2' } onChange={ () => this.handleChange('type', '2') }>大神</Radio>*/}
             {/*</List.Item>*/}
-            <Radio.RadioItem checked={ type === '1'} onChange={ () => this.handleChange('type', '1') }>大神</Radio.RadioItem>
-            <Radio.RadioItem checked={ type === '2'} onChange={ () => this.handleChange('type', '2') }>老板</Radio.RadioItem>
+            <Radio.RadioItem checked={ type === '1'} onChange={ () => this.handleChange('type', '1') }>老板</Radio.RadioItem>
+            <Radio.RadioItem checked={ type === '2'} onChange={ () => this.handleChange('type', '2') }>大神</Radio.RadioItem>
           </List>
           <WhiteSpace></WhiteSpace>
           <Button type="primary" onClick={ this.submit }>注册</Button>

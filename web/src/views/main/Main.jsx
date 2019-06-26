@@ -8,6 +8,11 @@ import { NavBar, Icon } from 'antd-mobile'
 
 import BossInfo from '../bossInfo/BossInfo'
 import UserInfo from '../userInfo/UserInfo'
+import BossList from '../bossList/BossList'
+import UserList from '../userList/UserList'
+import Message from '../message/Message'
+import Personal from '../personal/Personal'
+
 
 class Main extends Component {
   constructor(props) {
@@ -18,7 +23,7 @@ class Main extends Component {
   }
 
   // 动态设置title
-  getTitle = (props) => {
+  setTitle = (props) => {
     let pathname = props.location.pathname.slice(1)
     switch (pathname) {
       case 'bossinfo':
@@ -44,6 +49,10 @@ class Main extends Component {
     this.props.history.go(-1)
   }
 
+  componentWillMount() {
+    this.setTitle(this.props)
+  }
+
   render() {
     return (
       <div>
@@ -53,17 +62,17 @@ class Main extends Component {
         <Switch>
           <Route path="/bossinfo" component={ BossInfo }></Route>
           <Route path="/userinfo" component={ UserInfo }></Route>
+          <Route path="/bosslist" component={ BossList }></Route>
+          <Route path="/userlist" component={ UserList }></Route>
+          <Route path="/message" component={ Message }></Route>
+          <Route path="/personal" component={ Personal }></Route>
         </Switch>
       </div>
     );
   }
 
-  componentDidMount() {
-    this.getTitle(this.props)
-  }
-
   componentWillReceiveProps(nextProps, nextContext) {
-    this.getTitle(nextProps)
+    this.setTitle(nextProps)
   }
 
 }
