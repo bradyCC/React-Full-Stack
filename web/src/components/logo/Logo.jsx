@@ -2,7 +2,7 @@
  * Created by brady on 2019-06-22.
  */
 
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import logo from './logo.png'
 import './logo.less'
 

@@ -2,7 +2,7 @@
  * Created by brady on 2019-06-26.
  */
 
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
 class Personal extends Component {
   constructor(props) {

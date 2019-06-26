@@ -2,7 +2,7 @@
  * Created by brady on 2019-06-22.
  */
 
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { NavBar, WingBlank, WhiteSpace, List, InputItem, Button } from 'antd-mobile'
 import Logo from '../../components/logo/Logo'
 import { validata } from '../../utils/validata'

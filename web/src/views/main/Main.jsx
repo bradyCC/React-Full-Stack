@@ -13,6 +13,7 @@ import UserList from '../userList/UserList'
 import Message from '../message/Message'
 import Personal from '../personal/Personal'
 
+import Footer from '../../components/footer/Footer'
 
 class Main extends Component {
   constructor(props) {
@@ -67,6 +68,7 @@ class Main extends Component {
           <Route path="/message" component={ Message }></Route>
           <Route path="/personal" component={ Personal }></Route>
         </Switch>
+        <Footer></Footer>
       </div>
     );
   }

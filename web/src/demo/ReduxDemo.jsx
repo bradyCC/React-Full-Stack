@@ -2,7 +2,7 @@
  * Created by brady on 2019/6/25.
  */
 
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { WingBlank, WhiteSpace, Toast, Button } from 'antd-mobile'
 
 import { connect } from 'react-redux'

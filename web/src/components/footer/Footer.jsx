@@ -3,8 +3,9 @@
  */
 
 import React, { Component } from 'react'
+import { TabBar } from 'antd-mobile'
 
-class Message extends Component {
+class Footer extends Component {
   constructor(props) {
     super(props)
     this.state = {}
@@ -12,9 +13,13 @@ class Message extends Component {
 
   render() {
     return (
-      <div>聊天信息</div>
+      <div>
+        <TabBar>
+          <TabBar.Item></TabBar.Item>
+        </TabBar>
+      </div>
     );
   }
 }
 
-export default Message
+export default Footer

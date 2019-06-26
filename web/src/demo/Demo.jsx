@@ -2,7 +2,7 @@
  * Created by brady on 2019/6/25.
  */
 
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import SubDemo from './SubDemo'
 import ReduxDemo from './ReduxDemo'
 

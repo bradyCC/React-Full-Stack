@@ -2,7 +2,7 @@
  * Created by brady on 2019/6/26.
  */
 
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { List, Grid } from 'antd-mobile';
 import PropTypes from 'prop-types'
 import './selectavatar.less'
