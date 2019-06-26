@@ -34,10 +34,11 @@ class BossInfo extends Component {
     })
   }
 
+  // 保存
   submit = () => {
     // 验证
     let validataArr = [
-
+      {'val': this.state.header, 'type': 'isnull', 'name': '头像'},
       {'val': this.state.post, 'type': 'isnull', 'name': '招聘职位'},
       {'val': this.state.company, 'type': 'isnull', 'name': '公司名称'},
       {'val': this.state.salary, 'type': 'isnull', 'name': '职位薪资'},
