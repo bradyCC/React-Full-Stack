@@ -32,35 +32,24 @@ module.exports = () => {
     })
   })
 
-
-
-  // 查询用户
-  router.get('/users', async (req, res) => {
-    if (req.body.id) {
-      await User.findById(req.body.id, (err, data) => {
-        if (data) {
-          res.send({
-            code: 0,
-            message: '查询成功',
-            data: data
-          });
-        } else {
-          res.send({
-            code: -1,
-            message: '用户不存在'
-          });
-        }
-      });
-    } else {
-      await User.find((err, data) => {
+  // 获取用户信息
+  router.get('/', async (req, res) => {
+    await User.findById(req.user._id, (err, data) => {
+      if (data) {
         res.send({
           code: 0,
           message: '查询成功',
           data: data
         });
-      });
-    }
+      } else {
+        res.send({
+          code: -1,
+          message: '用户不存在'
+        });
+      }
+    });
   });
+
 
   // 删除用户
   router.delete('/removeUser', async (req, res) => {

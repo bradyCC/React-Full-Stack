@@ -70,6 +70,7 @@ class Login extends Component {
   componentWillMount() {
     delete localStorage.token
     delete localStorage.type
+    delete localStorage.avatar
   }
 
   render() {

@@ -17,7 +17,7 @@ class Footer extends Component {
     // 过滤footer渲染数据
     const footerList = this.props.footerList.filter(item => item.state !== false)
     return (
-      <div style={{ position: 'fixed', height: '100%', width: '100%', top: 0 }}>
+      <div style={{ position: 'fixed', width: '100%', bottom: 0 }}>
         <TabBar>
           {
             footerList.map((item, index) => {

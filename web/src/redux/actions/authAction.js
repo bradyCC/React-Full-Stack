@@ -27,6 +27,7 @@ export let authAction = (type = LOGIN, data) => {
         // 完善资料后，再次登陆，跳转到对应列表页
         } else {
           localStorage.type = data.data.type
+          localStorage.avatar = data.data.header
           switch (data.data.type) {
             case '1':
               createHashHistory().push('/userlist')
