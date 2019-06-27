@@ -12,8 +12,7 @@ import { authAction } from '../../redux/actions/authAction'
 
 // 关联
 const mapStateToProps = state => ({
-  isAuth: state.authReducer.isAuth,
-  username: state.authReducer.username
+  info: state.authReducer.info
 })
 
 // 装饰器
@@ -65,6 +64,12 @@ class Login extends Component {
   // 已有账户，跳转至注册页
   toRegister = () => {
     this.props.history.replace('/register')
+  }
+
+  // 清空token，用于处理权限
+  componentWillMount() {
+    delete localStorage.token
+    delete localStorage.type
   }
 
   render() {

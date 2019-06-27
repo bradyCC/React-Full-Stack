@@ -45,7 +45,7 @@ class UserInfo extends Component {
     this.$http.put('rest/users', this.state)
       .then(res => {
         Toast.success(res.data.message, 2, () => {
-          this.props.history.push('/main')
+          this.props.history.push('/userlist')
         })
     })
   }

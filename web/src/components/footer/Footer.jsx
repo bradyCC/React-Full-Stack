@@ -14,18 +14,17 @@ class Footer extends Component {
   }
 
   render() {
+    // 过滤footer渲染数据
+    const footerList = this.props.footerList.filter(item => item.state !== false)
     return (
-      <div style={{  position: 'fixed', height: '100%', width: '100%', top: 0 }}>
+      <div style={{ position: 'fixed', height: '100%', width: '100%', top: 0 }}>
         <TabBar>
           {
-            this.props.footerList.map((item, index) => {
-              return (
-                <TabBar.Item title={item.text} key={index}
-                             icon={{ uri: require(`./images/${item.icon}.png`)}}
-                             selectedIcon={{ uri: require(`./images/${item.icon}-selected.png`)}}
-                             selected={ this.props.location.pathname === item.path}
-                             onPress={() => this.props.history.push(item.path)}></TabBar.Item>
-                )
+            footerList.map((item, index) => {
+              return <TabBar.Item title={item.text} key={index} icon={{uri: require(`./images/${item.icon}.png`)}}
+                                  selectedIcon={{uri: require(`./images/${item.icon}-selected.png`)}}
+                                  selected={this.props.location.pathname === item.path}
+                                  onPress={() => this.props.history.push(item.path)}></TabBar.Item>
             })
           }
         </TabBar>

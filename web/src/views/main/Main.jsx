@@ -18,11 +18,11 @@ import Footer from '../../components/footer/Footer'
 class Main extends Component {
   constructor(props) {
     super(props)
-    this.footerList = [ // 测试数据
-      { path: '/bosslist', component: BossList, title: 'Boss列表', icon: 'boss', text: 'Boss' },
-      { path: '/userlist', component: UserList, title: '用户列表', icon: 'user', text: '用户' },
-      { path: '/message', component: Message, title: '消息', icon: 'message', text: '消息' },
-      { path: '/personal', component: Personal, title: '个人中心', icon: 'personal', text: '个人中心' },
+    this.footerList = [
+      { path: '/bosslist', component: BossList, icon: 'boss', text: 'Boss', state: localStorage.type === '2'? true: false },
+      { path: '/userlist', component: UserList, icon: 'user', text: '用户', state: localStorage.type === '1'? true: false },
+      { path: '/message', component: Message, icon: 'message', text: '消息' },
+      { path: '/personal', component: Personal, icon: 'personal', text: '个人中心' },
     ]
     this.state = {
       title: ``,
@@ -55,6 +55,7 @@ class Main extends Component {
         this.setState({ title: '首页' })
         break
     }
+
   }
 
   // 返回
@@ -62,10 +63,26 @@ class Main extends Component {
     this.props.history.go(-1)
   }
 
+  // 验证权限
+  checkData = (props) => {
+    let pathname = props.location.pathname
+    if (pathname.includes('bossinfo') || pathname.includes('userinfo')) {
+      if (!localStorage.token) props.history.push('/login')
+    } else {
+      if (!localStorage.type) props.history.push('/login')
+    }
+
+  }
+
+  componentWillMount() {
+    this.checkData(this.props)
+    this.setTitle(this.props)
+  }
+
   render() {
     return (
       <div>
-        <NavBar icon={ this.state.title.includes('完善资料')? <Icon type="left" />: '' } onLeftClick={ () => this.goBack() }>{ this.state.title }</NavBar>
+        <NavBar icon={ this.state.title.includes('完善资料')? <Icon type="left" />: '' } onLeftClick={ () => this.goBack() } style={{ position: 'sticky', top: 0, zIndex: '2' }}>{ this.state.title }</NavBar>
         <Switch>
           <Route path="/bossinfo" component={ BossInfo }></Route>
           <Route path="/userinfo" component={ UserInfo }></Route>
@@ -79,11 +96,8 @@ class Main extends Component {
     );
   }
 
-  componentDidMount() {
-    this.setTitle(this.props)
-  }
-
   componentWillReceiveProps(nextProps, nextContext) {
+    this.checkData(nextProps)
     this.setTitle(nextProps)
   }
 

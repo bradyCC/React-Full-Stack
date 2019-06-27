@@ -25,13 +25,14 @@ http.interceptors.response.use(res => {
   Toast.hide()
   console.log(res.data)
   if (res.status === 200 && res.data.code === 11000) {
-    Toast.fail('用户名已存在，请重新输入')
+    Toast.fail('用户名已存在')
     return Promise.reject(res.data.message)
   }
   return res
 },err => {
   if (err.response.data.code === 3600 ) {
     createHashHistory().push('/login')
+    delete localStorage.token
   }
   Toast.fail(err.response.data.message)
   return Promise.reject(err)

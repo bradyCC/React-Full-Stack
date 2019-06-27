@@ -18,6 +18,22 @@ module.exports = () => {
     });
   });
 
+  // 获取数据列表
+  router.get('/:type', async (req, res) => {
+    await req.Model.find({
+      type: req.params.type,
+      header: {$exists: true}
+    } , (err, data) => {
+      res.send({
+        code: 0,
+        message: '查询成功',
+        data: data
+      })
+    })
+  })
+
+
+
   // 查询用户
   router.get('/users', async (req, res) => {
     if (req.body.id) {

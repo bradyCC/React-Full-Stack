@@ -24,9 +24,19 @@ export let authAction = (type = LOGIN, data) => {
             default:
               break
           }
-        // 完善资料后，再次登陆，跳转到首页
+        // 完善资料后，再次登陆，跳转到对应列表页
         } else {
-          createHashHistory().push('/main')
+          localStorage.type = data.data.type
+          switch (data.data.type) {
+            case '1':
+              createHashHistory().push('/userlist')
+              break
+            case '2':
+              createHashHistory().push('/bosslist')
+              break
+            default:
+              break
+          }
         }
       })
     })
