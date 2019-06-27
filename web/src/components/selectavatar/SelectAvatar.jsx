@@ -19,7 +19,7 @@ class SelectAvatar extends Component {
     for (let i = 0; i < 16; i ++) {
       this.avatarList.push({
         text: `头像${i+1}`,
-        icon: require(`./avatars/avatar${i+1}.jpg`)
+        icon: require(`../../assets/images/avatars/avatar${i+1}.jpg`)
       })
     }
   }
