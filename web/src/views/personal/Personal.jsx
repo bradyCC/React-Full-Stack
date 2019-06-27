@@ -22,7 +22,7 @@ class Personal extends Component {
   }
 
   render() {
-    let header = `avatar${localStorage.avatar.slice(-1)}`
+    let header = `avatar${localStorage.avatar.replace(/[^0-9]/ig,"")}`
     return (
       <div className="personal">
         <Result img={ <img src={ require(`../../assets/images/avatars/${header}.jpg`) } alt="头像" />} title={ this.state.info.username} message={ this.state.info.company } ></Result>
@@ -30,9 +30,9 @@ class Personal extends Component {
           <List.Item multipleLine>
             <List.Item.Brief>职位：{ this.state.info.post }</List.Item.Brief>
             <List.Item.Brief>简介：{ this.state.info.info }</List.Item.Brief>
-            <List.Item.Brief>薪资：{ this.state.info.salary }</List.Item.Brief>
           </List.Item>
         </List>
+        <WhiteSpace></WhiteSpace>
         <WhiteSpace></WhiteSpace>
         <List>
           <Button type="warning" onClick={ () => this.Logout() }>退出</Button>

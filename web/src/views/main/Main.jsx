@@ -4,7 +4,7 @@
 
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
-import { NavBar, Icon } from 'antd-mobile'
+import { WhiteSpace, NavBar, Icon } from 'antd-mobile'
 
 import BossInfo from '../bossInfo/BossInfo'
 import UserInfo from '../userInfo/UserInfo'
@@ -30,8 +30,6 @@ class Main extends Component {
       title: ``,
     }
   }
-
-
 
   // 动态设置title
   setTitle = (props) => {
@@ -106,6 +104,7 @@ class Main extends Component {
           <Route path="/message" component={ Message }></Route>
           <Route path="/personal" component={ Personal }></Route>
         </Switch>
+        <WhiteSpace></WhiteSpace>
         { this.state.title.includes('完善资料')? '': <Footer footerList={ this.footerList }></Footer>}
       </div>
     );

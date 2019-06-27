@@ -3,6 +3,7 @@
  */
 
 import React, { Component } from 'react'
+import DataList from '../../components/datalist/DataList'
 
 class UserList extends Component {
   constructor(props) {
@@ -14,12 +15,14 @@ class UserList extends Component {
 
   render() {
     return (
-      <div>用户列表</div>
+      <div>
+        <DataList dataList={ this.state.bossList }></DataList>
+      </div>
     );
   }
 
   componentDidMount() {
-    this.$http.get('rest/users/1').then(res => {
+    this.$http.get('rest/users/2').then(res => {
       this.setState({
         bossList: res.data.data
       })
