@@ -18,8 +18,14 @@ import Footer from '../../components/footer/Footer'
 class Main extends Component {
   constructor(props) {
     super(props)
+    this.footerList = [ // 测试数据
+      { path: '/bosslist', component: BossList, title: 'Boss列表', icon: 'boss', text: 'Boss' },
+      { path: '/userlist', component: UserList, title: '用户列表', icon: 'user', text: '用户' },
+      { path: '/message', component: Message, title: '消息', icon: 'message', text: '消息' },
+      { path: '/personal', component: Personal, title: '个人中心', icon: 'personal', text: '个人中心' },
+    ]
     this.state = {
-      title: ``
+      title: ``,
     }
   }
 
@@ -28,19 +34,25 @@ class Main extends Component {
     let pathname = props.location.pathname.slice(1)
     switch (pathname) {
       case 'bossinfo':
-        this.setState({
-          title: 'Boss完善资料'
-        })
+        this.setState({ title: 'Boss完善资料' })
         break
       case 'userinfo':
-        this.setState({
-          title: '用户完善资料'
-        })
+        this.setState({ title: '用户完善资料' })
+        break
+      case 'bosslist':
+        this.setState({ title: 'Boss列表' })
+        break
+      case 'userlist':
+        this.setState({ title: '用户列表' })
+        break
+      case 'message':
+        this.setState({ title: '消息' })
+        break
+      case 'personal':
+        this.setState({ title: '个人中心' })
         break
       default:
-        this.setState({
-          title: '首页'
-        })
+        this.setState({ title: '首页' })
         break
     }
   }
@@ -50,16 +62,10 @@ class Main extends Component {
     this.props.history.go(-1)
   }
 
-  componentWillMount() {
-    this.setTitle(this.props)
-  }
-
   render() {
     return (
       <div>
-        <NavBar
-          icon={ this.state.title !== '首页'? <Icon type="left" />: ''}
-          onLeftClick={ () => this.goBack() }>{ this.state.title }</NavBar>
+        <NavBar icon={ this.state.title.includes('完善资料')? <Icon type="left" />: '' } onLeftClick={ () => this.goBack() }>{ this.state.title }</NavBar>
         <Switch>
           <Route path="/bossinfo" component={ BossInfo }></Route>
           <Route path="/userinfo" component={ UserInfo }></Route>
@@ -68,9 +74,13 @@ class Main extends Component {
           <Route path="/message" component={ Message }></Route>
           <Route path="/personal" component={ Personal }></Route>
         </Switch>
-        <Footer></Footer>
+        { this.state.title.includes('完善资料')? '': <Footer footerList={ this.footerList }></Footer>}
       </div>
     );
+  }
+
+  componentDidMount() {
+    this.setTitle(this.props)
   }
 
   componentWillReceiveProps(nextProps, nextContext) {
