@@ -3,7 +3,7 @@
  */
 
 import React, { Component } from 'react'
-import { WhiteSpace, Toast, Result, List, Button } from 'antd-mobile'
+import { WhiteSpace, Modal, Result, List, Button } from 'antd-mobile'
 import './personal.less'
 
 class Personal extends Component {
@@ -15,8 +15,10 @@ class Personal extends Component {
   }
 
   Logout = () => {
-    Toast.success('已退出')
-    this.props.history.push('/login')
+    Modal.alert('', '您确认退出吗？', [
+      { text: '取消', onPress: () => {} },
+      { text: '确定', onPress: () => this.props.history.push('/login')}
+    ])
   }
 
   render() {
