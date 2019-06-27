@@ -19,8 +19,10 @@ class Main extends Component {
   constructor(props) {
     super(props)
     this.footerList = [
-      { path: '/bosslist', component: BossList, icon: 'boss', text: 'Boss', state: localStorage.type === '2'? true: false },
-      { path: '/userlist', component: UserList, icon: 'user', text: '用户', state: localStorage.type === '1'? true: false },
+      // { path: '/bosslist', component: BossList, icon: 'boss', text: 'Boss', state: localStorage.type === '2'? true: false },
+      // { path: '/userlist', component: UserList, icon: 'user', text: '用户', state: localStorage.type === '1'? true: false },
+      { path: '/bosslist', component: BossList, icon: 'boss', text: 'Boss' },
+      { path: '/userlist', component: UserList, icon: 'user', text: '用户' },
       { path: '/message', component: Message, icon: 'message', text: '消息' },
       { path: '/personal', component: Personal, icon: 'personal', text: '个人中心' },
     ]
@@ -28,6 +30,8 @@ class Main extends Component {
       title: ``,
     }
   }
+
+
 
   // 动态设置title
   setTitle = (props) => {
@@ -72,6 +76,17 @@ class Main extends Component {
       if (!localStorage.type) props.history.push('/login')
     }
 
+    // 动态设置footer
+    switch (localStorage.type) {
+      case '1':
+        this.footerList[0].state = false
+        break
+      case '2':
+        this.footerList[1].state = false
+        break
+      default:
+        break
+    }
   }
 
   componentWillMount() {
@@ -100,7 +115,6 @@ class Main extends Component {
     this.checkData(nextProps)
     this.setTitle(nextProps)
   }
-
 }
 
 export default Main

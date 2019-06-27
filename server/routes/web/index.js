@@ -10,12 +10,12 @@ module.exports = () => {
 
   // 完善资料保存接口
   router.put('/', async (req, res) => {
-    await req.Model.findByIdAndUpdate(req.user._id, req.body, (err, data) => {
-      res.send({
-        code: 0,
-        message: '修改成功'
-      })
-    });
+    let result = await req.Model.findByIdAndUpdate(req.user._id, req.body, (err, data) => {});
+    res.send({
+      code: 0,
+      message: '修改成功',
+      data: result
+    })
   });
 
   // 获取数据列表

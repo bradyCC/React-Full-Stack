@@ -30,9 +30,8 @@ http.interceptors.response.use(res => {
   }
   return res
 },err => {
-  if (err.response.data.code === 3600 ) {
+  if (err.response.status === 401 || err.response.data.code === 3600) {
     createHashHistory().push('/login')
-    delete localStorage.token
   }
   Toast.fail(err.response.data.message)
   return Promise.reject(err)
