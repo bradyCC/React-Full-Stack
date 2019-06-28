@@ -42,8 +42,7 @@ class UserInfo extends Component {
     ]
     if (!validata(validataArr)) return false
 
-    this.$http.put('rest/users', this.state)
-      .then(res => {
+    this.$http.put('rest/users', this.state).then(res => {
         Toast.success(res.data.message, 2, () => {
           localStorage.type = res.data.data.type
           localStorage.avatar = res.data.data.header

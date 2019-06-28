@@ -8,6 +8,7 @@ module.exports = app => {
     useNewUrlParser: true
   });
 
+  mongoose.set('useFindAndModify', false)
   mongoose.connection.on('connected', () => { console.log('Mongodb Database connection successful!') });
 
   require('require-all')(__dirname + '/../models');

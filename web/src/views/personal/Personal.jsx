@@ -22,7 +22,8 @@ class Personal extends Component {
   }
 
   render() {
-    let header = `avatar${localStorage.avatar.replace(/[^0-9]/ig,"")}`
+    let header
+    localStorage.avatar? header = `avatar${localStorage.avatar.replace(/[^0-9]/ig,"")}`: header = `avatar1`
     return (
       <div className="personal">
         <Result img={ <img src={ require(`../../assets/images/avatars/${header}.jpg`) } alt="头像" />} title={ this.state.info.username} message={ this.state.info.company } ></Result>

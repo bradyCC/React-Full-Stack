@@ -42,11 +42,9 @@ class Register extends Component {
 
     // 提交数据
     this.$http.post('register', this.state).then(res => {
-      if (res.data.code === 0) {
-        Toast.success('注册成功', 1, () => {
-          this.props.history.push('/login')
-        })
-      }
+      Toast.success('注册成功', 1, () => {
+        this.props.history.push('/login')
+      })
     })
   }
 

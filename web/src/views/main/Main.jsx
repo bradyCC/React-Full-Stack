@@ -57,7 +57,6 @@ class Main extends Component {
         this.setState({ title: '首页' })
         break
     }
-
   }
 
   // 返回
@@ -75,16 +74,7 @@ class Main extends Component {
     }
 
     // 动态设置footer
-    switch (localStorage.type) {
-      case '1':
-        this.footerList[0].state = false
-        break
-      case '2':
-        this.footerList[1].state = false
-        break
-      default:
-        break
-    }
+    localStorage.type === '1'? this.footerList[0].state = false: this.footerList[1].state = false
   }
 
   componentWillMount() {
