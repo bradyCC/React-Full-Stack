@@ -7,7 +7,6 @@ import { List, InputItem } from 'antd-mobile'
 import './chat.less'
 import { validata } from '../../utils/validata'
 import initIO from '../../utils/initIO'
-import PropTypes from 'prop-types'
 
 class Chat extends Component {
   constructor(props) {
@@ -15,7 +14,8 @@ class Chat extends Component {
     this.state = {
       content: ``,
       from: ``,
-      to: ``
+      to: ``,
+      messageList: ``
     }
   }
 
@@ -34,7 +34,8 @@ class Chat extends Component {
     ]
     if (!validata(validataArr)) return false
 
-    initIO(this.state)
+    const {form, to, content} = this.state
+    initIO({form, to, content})
 
     // 发送成功，清空内容
     this.setState({ content: `` })
@@ -44,10 +45,27 @@ class Chat extends Component {
     return (
       <div id="chat-page">
         <List>
-          <List.Item thumb={ require('../../assets/images/avatars/avatar1.jpg') }>你好1</List.Item>
+          {/*{*/}
+          {/*  this.state.messageList.chatMsgs.map(item => {*/}
+          {/*    let content*/}
+          {/*    if (item._id === this.state.from) {*/}
+          {/*      content = (*/}
+          {/*        <List.Item className="chat-me" extra={ <img src={ require('../../assets/images/avatars/avatar2.jpg') } alt="" /> }>你好4</List.Item>*/}
+          {/*      )*/}
+          {/*    } else if (item._id === this.state.to) {*/}
+          {/*      content = (*/}
+          {/*        <List.Item thumb={ require('../../assets/images/avatars/avatar1.jpg') }>你好1</List.Item>*/}
+          {/*      )*/}
+          {/*    }*/}
+          {/*    return (*/}
+          {/*      { content }*/}
+          {/*    )*/}
+          {/*  })*/}
+          {/*}*/}
+
           <List.Item thumb={ require('../../assets/images/avatars/avatar1.jpg') }>你好2</List.Item>
           <List.Item className="chat-me" extra={ <img src={ require('../../assets/images/avatars/avatar2.jpg') } alt="" /> }>你好3</List.Item>
-          <List.Item className="chat-me" extra={ <img src={ require('../../assets/images/avatars/avatar2.jpg') } alt="" /> }>你好4</List.Item>
+
         </List>
         <div className="send-message">
           <InputItem value={ this.state.content } placeholder="请输入" extra={ <span onClick={() => this.handleSend() }>发送</span> } onChange={ val => this.handleChange('content', val) }></InputItem>
@@ -57,10 +75,14 @@ class Chat extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props)
     this.setState({
       from: localStorage.id,
       to: localStorage.to
+    })
+    this.$http.get('rest/messageList').then(res => {
+      this.setState({
+        messageList: res.data.data
+      })
     })
   }
 
@@ -70,9 +92,5 @@ class Chat extends Component {
     delete localStorage.title
   }
 }
-
-// Chat.propTypes = {
-//   messageList: PropTypes.object.isRequired,
-// }
 
 export default Chat
