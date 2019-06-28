@@ -3,19 +3,30 @@
  */
 
 import React, {Component} from 'react'
-import { List, InputItem } from 'antd-mobile'
+import { WhiteSpace, List, InputItem } from 'antd-mobile'
 import './chat.less'
 import { validata } from '../../utils/validata'
 import initIO from '../../utils/initIO'
+
+import { connect } from 'react-redux'
+import { messageAction } from '../../redux/actions/messageAction'
+
+// 关联
+const mapStateToProps = state => ({
+  users: state.messageReducer.users,
+  chatMsgs: state.messageReducer.chatMsgs
+})
+
+// 装饰器
+@connect(mapStateToProps, { messageAction: messageAction })
 
 class Chat extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      from: localStorage.id,
+      to: localStorage.to,
       content: ``,
-      from: ``,
-      to: ``,
-      messageList: ``
     }
   }
 
@@ -34,39 +45,41 @@ class Chat extends Component {
     ]
     if (!validata(validataArr)) return false
 
-    const {form, to, content} = this.state
-    initIO({form, to, content})
+    initIO(this.state)
 
     // 发送成功，清空内容
     this.setState({ content: `` })
   }
 
   render() {
+    let { users, chatMsgs } = this.props
+    let fromHeader, toHeader
+    for (let i in users) {
+      if (i === this.state.from) fromHeader = `avatar${users[i].header.replace(/[^0-9]/ig,"")}`
+      if (i === this.state.to) toHeader = `avatar${users[i].header.replace(/[^0-9]/ig,"")}`
+    }
     return (
       <div id="chat-page">
         <List>
-          {/*{*/}
-          {/*  this.state.messageList.chatMsgs.map(item => {*/}
-          {/*    let content*/}
-          {/*    if (item._id === this.state.from) {*/}
-          {/*      content = (*/}
-          {/*        <List.Item className="chat-me" extra={ <img src={ require('../../assets/images/avatars/avatar2.jpg') } alt="" /> }>你好4</List.Item>*/}
-          {/*      )*/}
-          {/*    } else if (item._id === this.state.to) {*/}
-          {/*      content = (*/}
-          {/*        <List.Item thumb={ require('../../assets/images/avatars/avatar1.jpg') }>你好1</List.Item>*/}
-          {/*      )*/}
-          {/*    }*/}
-          {/*    return (*/}
-          {/*      { content }*/}
-          {/*    )*/}
-          {/*  })*/}
-          {/*}*/}
-
-          <List.Item thumb={ require('../../assets/images/avatars/avatar1.jpg') }>你好2</List.Item>
-          <List.Item className="chat-me" extra={ <img src={ require('../../assets/images/avatars/avatar2.jpg') } alt="" /> }>你好3</List.Item>
-
+          {
+            chatMsgs.map(item => {
+              let content
+              if (item.from === this.state.from && item.to === this.state.to) {
+                content = (
+                  <List.Item key={ item._id } thumb={ require(`../../assets/images/avatars/${fromHeader}.jpg`) }  wrap="true">{ item.content }</List.Item>
+                )
+              } else if (item.from === this.state.to && item.to === this.state.from) {
+                content = (
+                  <List.Item className="chat-me" key={ item._id } extra={ <img src={ require(`../../assets/images/avatars/${toHeader}.jpg`) } alt="" wrap="true" /> }>{ item.content }</List.Item>
+                  )
+              }
+              return (
+                content
+              )
+            })
+          }
         </List>
+        <WhiteSpace></WhiteSpace>
         <div className="send-message">
           <InputItem value={ this.state.content } placeholder="请输入" extra={ <span onClick={() => this.handleSend() }>发送</span> } onChange={ val => this.handleChange('content', val) }></InputItem>
         </div>
@@ -75,15 +88,7 @@ class Chat extends Component {
   }
 
   componentDidMount() {
-    this.setState({
-      from: localStorage.id,
-      to: localStorage.to
-    })
-    this.$http.get('rest/messageList').then(res => {
-      this.setState({
-        messageList: res.data.data
-      })
-    })
+    this.props.messageAction()
   }
 
   // 离开时，删除localStorage

@@ -7,9 +7,11 @@ import { demoReducer } from './demoReducer'
 import { counterReducer } from './counterReducer'
 
 import { authReducer } from './authReducer'
+import { messageReducer } from './messageReducer'
 
 export default combineReducers({
   demoReducer,
   counterReducer,
   authReducer,
+  messageReducer
 })

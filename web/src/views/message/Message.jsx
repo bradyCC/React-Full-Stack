@@ -16,11 +16,6 @@ class Message extends Component {
     );
   }
 
-  componentDidMount() {
-    this.$http.get('rest/messageList').then(res => {
-
-    })
-  }
 }
 
 export default Message

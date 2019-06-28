@@ -85,9 +85,23 @@ class Main extends Component {
   // 动态设置未读消息、消息详情
   getMessageList = () => {
     this.$http.get('rest/messageList').then(res => {
+      // 设置未读消息
       this.footerList[2].badge = res.data.data.chatMsgs.filter(item => item.to === localStorage.id && item.read === false).length
-      this.setState({ badge: true })
+      // 设置消息详情
+      let users = res.data.data.users
+      for (let i in users) {
+        users[i].header = `avatar${users[i].header.replace(/[^0-9]/ig, "")}`
+      }
+      localStorage.users = JSON.stringify(users)
+      localStorage.chatMsgs = JSON.stringify(res.data.data.chatMsgs)
+      this.setState({badge: true})
     })
+  }
+
+  componentWillMount() {
+    this.checkData(this.props)
+    this.setTitle(this.props)
+    // this.getMessageList()
   }
 
   render() {
@@ -109,15 +123,10 @@ class Main extends Component {
     );
   }
 
-  componentDidMount() {
-    this.checkData(this.props)
-    this.setTitle(this.props)
-    this.getMessageList()
-  }
-
   componentWillReceiveProps(nextProps, nextContext) {
     this.checkData(nextProps)
     this.setTitle(nextProps)
+    // this.getMessageList()
   }
 }
 
