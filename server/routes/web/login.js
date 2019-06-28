@@ -29,6 +29,7 @@ module.exports = () => {
       code: 0,
       message: '登录成功',
       username,
+      id: user._id,
       type: user.type,
       header: user.header,
       token

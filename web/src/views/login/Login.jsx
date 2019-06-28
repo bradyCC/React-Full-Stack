@@ -68,9 +68,11 @@ class Login extends Component {
 
   // 清空token，用于处理权限
   componentWillMount() {
-    delete localStorage.token
-    delete localStorage.type
-    delete localStorage.avatar
+    localStorage.clear()
+    // delete localStorage.id
+    // delete localStorage.token
+    // delete localStorage.type
+    // delete localStorage.avatar
   }
 
   render() {

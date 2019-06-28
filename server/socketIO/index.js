@@ -14,7 +14,6 @@ module.exports = (server) => {
       console.log('服务器接收到客户端发送的消息：', data)
 
       // 处理数据
-      data.name = data.name.toUpperCase()
       data.date = Date.now()
 
       // 服务器向客户端发送消息

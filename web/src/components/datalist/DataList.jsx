@@ -5,6 +5,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import { WingBlank, WhiteSpace, Card } from 'antd-mobile'
+import { withRouter } from 'react-router-dom'
 
 class DataList extends Component {
   constructor(props) {
@@ -12,7 +13,15 @@ class DataList extends Component {
     this.state = {}
   }
 
+  // 进行聊天
+  toChat = (id, username) => {
+    localStorage.to = id
+    localStorage.title = username
+    this.props.history.push(`/chat`)
+  }
+
   render() {
+    // 处理头像
     let dataList = this.props.dataList.map(item => {
       item.header = `avatar${item.header.replace(/[^0-9]/ig,"")}`
       return item
@@ -43,7 +52,7 @@ class DataList extends Component {
               <WingBlank key={item._id}>
                 <div>
                   <WhiteSpace></WhiteSpace>
-                  <Card>
+                  <Card onClick={ () => this.toChat(item._id, item.username) }>
                     <Card.Header thumb={ require(`../../assets/images/avatars/${item.header}.jpg`) } thumbStyle={{ width: '60px', height: '60px' }} extra={ item.username }/>
                     { content }
                   </Card>
@@ -62,4 +71,4 @@ DataList.propTypes = {
   dataList: PropTypes.array.isRequired,
 }
 
-export default DataList
+export default withRouter(DataList)

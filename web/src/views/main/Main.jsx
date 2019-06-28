@@ -12,22 +12,23 @@ import BossList from '../bossList/BossList'
 import UserList from '../userList/UserList'
 import Message from '../message/Message'
 import Personal from '../personal/Personal'
+import Chat from '../chat/Chat'
 
 import Footer from '../../components/footer/Footer'
 
 class Main extends Component {
   constructor(props) {
     super(props)
+    // 底部导航栏基础数据
     this.footerList = [
-      // { path: '/bosslist', component: BossList, icon: 'boss', text: 'Boss', state: localStorage.type === '2'? true: false },
-      // { path: '/userlist', component: UserList, icon: 'user', text: '用户', state: localStorage.type === '1'? true: false },
       { path: '/bosslist', component: BossList, icon: 'boss', text: 'Boss' },
       { path: '/userlist', component: UserList, icon: 'user', text: '用户' },
       { path: '/message', component: Message, icon: 'message', text: '消息' },
       { path: '/personal', component: Personal, icon: 'personal', text: '个人中心' },
     ]
     this.state = {
-      title: ``,
+      title: ``, // 标题
+      flag: false // 控制goBack、Footer显示
     }
   }
 
@@ -36,25 +37,28 @@ class Main extends Component {
     let pathname = props.location.pathname.slice(1)
     switch (pathname) {
       case 'bossinfo':
-        this.setState({ title: 'Boss完善资料' })
+        this.setState({ title: 'Boss完善资料', flag: true })
         break
       case 'userinfo':
-        this.setState({ title: '用户完善资料' })
+        this.setState({ title: '用户完善资料', flag: true })
         break
       case 'bosslist':
-        this.setState({ title: 'Boss列表' })
+        this.setState({ title: 'Boss列表', flag: false })
         break
       case 'userlist':
-        this.setState({ title: '用户列表' })
+        this.setState({ title: '用户列表', flag: false })
         break
       case 'message':
-        this.setState({ title: '消息' })
+        this.setState({ title: '消息', flag: false })
         break
       case 'personal':
-        this.setState({ title: '个人中心' })
+        this.setState({ title: '个人中心', flag: false })
+        break
+      case 'chat':
+        this.setState({ title: localStorage.title, flag: true })
         break
       default:
-        this.setState({ title: '首页' })
+        this.setState({ title: '首页', flag: false })
         break
     }
   }
@@ -85,7 +89,7 @@ class Main extends Component {
   render() {
     return (
       <div>
-        <NavBar icon={ this.state.title.includes('完善资料')? <Icon type="left" />: '' } onLeftClick={ () => this.goBack() } style={{ position: 'sticky', top: 0, zIndex: '2' }}>{ this.state.title }</NavBar>
+        <NavBar icon={ this.state.flag? <Icon type="left" />: '' } onLeftClick={ () => this.goBack() } style={{ position: 'sticky', top: 0, zIndex: '2' }}>{ this.state.title }</NavBar>
         <Switch>
           <Route path="/bossinfo" component={ BossInfo }></Route>
           <Route path="/userinfo" component={ UserInfo }></Route>
@@ -93,9 +97,10 @@ class Main extends Component {
           <Route path="/userlist" component={ UserList }></Route>
           <Route path="/message" component={ Message }></Route>
           <Route path="/personal" component={ Personal }></Route>
+          <Route path="/chat" component={ Chat }></Route>
         </Switch>
         <WhiteSpace></WhiteSpace>
-        { this.state.title.includes('完善资料')? '': <Footer footerList={ this.footerList }></Footer>}
+        { this.state.flag? '': <Footer footerList={ this.footerList }></Footer>}
       </div>
     );
   }
