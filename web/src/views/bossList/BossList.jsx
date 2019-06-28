@@ -22,7 +22,7 @@ class BossList extends Component {
   }
 
   componentDidMount() {
-    this.$http.get('rest/users/1').then(res => {
+    this.$http.get('rest/userList/1').then(res => {
       this.setState({
         userList: res.data.data
       })

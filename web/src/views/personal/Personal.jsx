@@ -43,7 +43,7 @@ class Personal extends Component {
   }
 
   componentDidMount() {
-    this.$http.get('/rest/users').then(res => {
+    this.$http.get('rest/users').then(res => {
       this.setState({
         info: res.data.data
       })

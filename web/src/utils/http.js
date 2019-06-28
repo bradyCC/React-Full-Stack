@@ -11,7 +11,8 @@ const http = axios.create({
 
 // axios 请求头
 http.interceptors.request.use(config => {
-  Toast.loading('提交中')
+  let content = config.method === 'get'? '查询中': '提交中'
+  Toast.loading(content)
   if (localStorage.token) {
     config.headers.Authorization = 'Bearer ' + localStorage.token
   }

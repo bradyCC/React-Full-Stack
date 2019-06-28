@@ -10,7 +10,6 @@ module.exports = () => {
 
   // 登录
   router.post('/', async (req, res, next) => {
-
     const {username, password } = req.body;
 
     // 1.验证用户名

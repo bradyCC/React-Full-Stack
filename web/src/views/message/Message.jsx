@@ -15,6 +15,12 @@ class Message extends Component {
       <div>聊天信息</div>
     );
   }
+
+  componentDidMount() {
+    this.$http.get('rest/messageList').then(res => {
+
+    })
+  }
 }
 
 export default Message

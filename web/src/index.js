@@ -5,8 +5,8 @@ import http from './utils/http'
 
 import * as serviceWorker from './serviceWorker';
 
-// 测试socketIO
-// import './test/socketio_test';
+// 测试socketio
+// import './test/socketio'
 
 React.Component.prototype.$http = http
 
