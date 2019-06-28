@@ -21,7 +21,7 @@ class Footer extends Component {
         <TabBar>
           {
             footerList.map((item, index) => {
-              return <TabBar.Item title={item.text} key={index} icon={{uri: require(`./images/${item.icon}.png`)}}
+              return <TabBar.Item title={item.text} key={index} icon={{uri: require(`./images/${item.icon}.png`)}} badge={item.badge}
                                   selectedIcon={{uri: require(`./images/${item.icon}-selected.png`)}}
                                   selected={this.props.location.pathname === item.path}
                                   onPress={() => this.props.history.push(item.path)}></TabBar.Item>

@@ -28,7 +28,8 @@ class Main extends Component {
     ]
     this.state = {
       title: ``, // 标题
-      flag: false // 控制goBack、Footer显示
+      flag: false, // 控制goBack、Footer显示
+      badge: false
     }
   }
 
@@ -81,9 +82,12 @@ class Main extends Component {
     localStorage.type === '1'? this.footerList[0].state = false: this.footerList[1].state = false
   }
 
-  componentWillMount() {
-    this.checkData(this.props)
-    this.setTitle(this.props)
+  // 动态设置未读消息、消息详情
+  getMessageList = () => {
+    this.$http.get('rest/messageList').then(res => {
+      this.footerList[2].badge = res.data.data.chatMsgs.filter(item => item.to === localStorage.id && item.read === false).length
+      this.setState({ badge: true })
+    })
   }
 
   render() {
@@ -103,6 +107,12 @@ class Main extends Component {
         { this.state.flag? '': <Footer footerList={ this.footerList }></Footer>}
       </div>
     );
+  }
+
+  componentDidMount() {
+    this.checkData(this.props)
+    this.setTitle(this.props)
+    this.getMessageList()
   }
 
   componentWillReceiveProps(nextProps, nextContext) {

@@ -6,8 +6,8 @@ import React, {Component} from 'react'
 import { List, InputItem } from 'antd-mobile'
 import './chat.less'
 import { validata } from '../../utils/validata'
-
 import initIO from '../../utils/initIO'
+import PropTypes from 'prop-types'
 
 class Chat extends Component {
   constructor(props) {
@@ -35,6 +35,7 @@ class Chat extends Component {
     if (!validata(validataArr)) return false
 
     initIO(this.state)
+
     // 发送成功，清空内容
     this.setState({ content: `` })
   }
@@ -48,7 +49,6 @@ class Chat extends Component {
           <List.Item className="chat-me" extra={ <img src={ require('../../assets/images/avatars/avatar2.jpg') } alt="" /> }>你好3</List.Item>
           <List.Item className="chat-me" extra={ <img src={ require('../../assets/images/avatars/avatar2.jpg') } alt="" /> }>你好4</List.Item>
         </List>
-
         <div className="send-message">
           <InputItem value={ this.state.content } placeholder="请输入" extra={ <span onClick={() => this.handleSend() }>发送</span> } onChange={ val => this.handleChange('content', val) }></InputItem>
         </div>
@@ -57,6 +57,7 @@ class Chat extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props)
     this.setState({
       from: localStorage.id,
       to: localStorage.to
@@ -69,5 +70,9 @@ class Chat extends Component {
     delete localStorage.title
   }
 }
+
+// Chat.propTypes = {
+//   messageList: PropTypes.object.isRequired,
+// }
 
 export default Chat

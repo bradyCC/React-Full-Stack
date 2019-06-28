@@ -22,8 +22,13 @@ module.exports = (server) => {
       // 存储数据
       await Chat.create({from, to, content, chat_id, create_time}, (err, data) => {
         // 服务器向客户端发送消息
-        io.emit('receiveMsg', data) // 发送给当前socket对应的客户端
-        console.log('服务器向客户端发送的消息：', data)
+        if (err) {
+          io.emit('receiveMsg', { code: -1, message: '消息发送失败', data: err }) // 发送给当前socket对应的客户端
+          console.log('服务器向客户端发送的消息：', { code: -1, message: '消息发送失败', data: err })
+        } else {
+          io.emit('receiveMsg', { code: 0, message: '消息发送成功', data: data }) // 发送给当前socket对应的客户端
+          console.log('服务器向客户端发送的消息：', { code: 0, message: '消息发送成功', data: data })
+        }
 
         // // io.emit('receiveMsg', data) // 发送给所有连接在服务器上的客户端
         // socket.emit('receiveMsg', data) // 发送给当前socket对应的客户端
