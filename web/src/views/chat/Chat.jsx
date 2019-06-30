@@ -3,7 +3,7 @@
  */
 
 import React, {Component} from 'react'
-import { WhiteSpace, List, InputItem } from 'antd-mobile'
+import { WhiteSpace, List, InputItem, Grid } from 'antd-mobile'
 import './chat.less'
 import { validata } from '../../utils/validata'
 import { connect } from 'react-redux'
@@ -24,11 +24,11 @@ const mapStateToProps = state => ({
 class Chat extends Component {
   constructor(props) {
     super(props)
-    this.socket = {}
     this.state = {
       from: localStorage.id,
       to: localStorage.to,
       content: ``,
+      showEmoji: false,
     }
   }
 
@@ -48,15 +48,22 @@ class Chat extends Component {
     ]
     if (!validata(validataArr)) return false
 
-    socket.emit('sendMsg', this.state)
-    this.setState({ content: `` })
+    let { from, to, content } = this.state
+    socket.emit('sendMsg', { from, to, content })
+    this.setState({
+      content: ``,
+      showEmoji: false,
+    })
   }
 
-  componentWillMount() {
-    socket._callbacks.$receiveMsg = []
-    socket.on('receiveMsg', data => {
-      this.props.messageAction()
+  // 切换显示表情
+  handleToggle = () => {
+    this.setState({
+      showEmoji: !this.state.showEmoji
     })
+    setTimeout(() => {
+      window.dispatchEvent(new Event('resize'))
+    }, 0)
   }
 
   render() {
@@ -66,8 +73,9 @@ class Chat extends Component {
       if (i === this.state.from) fromHeader = `avatar${users[i].header.replace(/[^0-9]/ig,"")}`
       if (i === this.state.to) toHeader = `avatar${users[i].header.replace(/[^0-9]/ig,"")}`
     }
+    let emoji = '😀 😃 😅 🤣 😂 😍 🤩 😘 😋 😛 😜 🤪 😝 😔 😪 😴 😷 🤒 🤧 😵 🥵 😎 ☹ 😳 🥺 😱 😓 👻 👌 👍 👏 🤝 🙏 💪 👣 ☂ 🌂 🧳 👓 🕶 👕 👖 🧤 🎒 👠 👑 🎓 🧢 💄 💍 💼'.split(' ').map(item => ({text: item}))
     return (
-      <div id="chat-page">
+      <div id="chat-page" className="sticky-body">
         <List>
           {
             chatMsgs.map(item => {
@@ -89,11 +97,26 @@ class Chat extends Component {
         </List>
         <WhiteSpace></WhiteSpace>
         <div className="send-message">
-          <InputItem value={ this.state.content } placeholder="请输入" extra={ <span onClick={() => this.handleSend() }>发送</span> } onChange={ val => this.handleChange('content', val) }></InputItem>
+          <InputItem value={ this.state.content } placeholder="请输入" extra={ <div><span role="img" aria-label="表情" style={{ marginRight: '10px'}} onClick={ () => this.handleToggle() }>😜</span><span onClick={() => this.handleSend() }>发送</span></div> } onChange={ val => this.handleChange('content', val) } onFocus={ () => this.setState({ showEmoji: false })}></InputItem>
+          {this.state.showEmoji? <Grid data={ emoji } columnNum={9} carouselMaxRow={4} isCarousel={true} onClick={(item) => this.setState({ content: this.state.content + item.text })}></Grid>: ''}
         </div>
       </div>
     )
   }
+
+  componentDidMount() {
+    this.props.messageAction()
+    // socket._callbacks.$receiveMsg = []
+    // socket.on('receiveMsg', data => {
+    //   console.log('222')
+    // })
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    // 更新显示列表
+    window.scrollTo(0, document.body.scrollHeight)
+  }
+
 }
 
 export default Chat

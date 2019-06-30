@@ -19,6 +19,9 @@ import Footer from '../../components/footer/Footer'
 import { connect } from 'react-redux'
 import { messageAction } from '../../redux/actions/messageAction'
 
+import io from 'socket.io-client'
+const socket = io('http://localhost:3000')
+
 // 关联
 const mapStateToProps = state => ({
   unread: state.messageReducer.unread,
@@ -95,6 +98,10 @@ class Main extends Component {
     this.checkData(this.props)
     this.setTitle(this.props)
     this.props.messageAction()
+    socket._callbacks.$receiveMsg = []
+    socket.on('receiveMsg', data => {
+      this.props.messageAction()
+    })
   }
 
   render() {
@@ -102,7 +109,7 @@ class Main extends Component {
     this.footerList[2].badge = unread
     return (
       <div>
-        <NavBar icon={ this.state.flag? <Icon type="left" />: '' } onLeftClick={ () => this.goBack() } style={{ position: 'sticky', top: 0, zIndex: '2' }}>{ this.state.title }</NavBar>
+        <NavBar icon={ this.state.flag? <Icon type="left" />: '' } onLeftClick={ () => this.goBack() } style={{ position: 'fixed', width: '100%', top: 0, zIndex: '2' }}>{ this.state.title }</NavBar>
         <Switch>
           <Route path="/bossinfo" component={ BossInfo }></Route>
           <Route path="/userinfo" component={ UserInfo }></Route>

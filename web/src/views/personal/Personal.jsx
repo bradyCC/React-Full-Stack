@@ -25,7 +25,7 @@ class Personal extends Component {
     let header
     localStorage.avatar? header = `avatar${localStorage.avatar.replace(/[^0-9]/ig,"")}`: header = `avatar1`
     return (
-      <div className="personal">
+      <div className="personal sticky-body">
         <Result img={ <img src={ require(`../../assets/images/avatars/${header}.jpg`) } alt="头像" />} title={ this.state.info.username} message={ this.state.info.company } ></Result>
         <List renderHeader={() => '相关信息'}>
           <List.Item multipleLine>

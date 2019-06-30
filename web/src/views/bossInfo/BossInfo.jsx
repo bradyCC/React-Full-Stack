@@ -58,7 +58,7 @@ class BossInfo extends Component {
 
   render() {
     return (
-      <div>
+      <div className="sticky-body">
         <SelectAvatar selectAvatar={ this.selectAvatar }></SelectAvatar>
         <InputItem placeholder="请输入招聘职位" onChange={ val => this.handleChange('post', val) }>招聘职位</InputItem>
         <InputItem placeholder="请输入公司名称" onChange={ val => this.handleChange('company', val) }>公司名称</InputItem>

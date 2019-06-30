@@ -12,7 +12,7 @@ class Message extends Component {
 
   render() {
     return (
-      <div>聊天信息</div>
+      <div className="sticky-body">聊天信息</div>
     );
   }
 

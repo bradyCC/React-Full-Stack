@@ -54,7 +54,7 @@ class UserInfo extends Component {
 
   render() {
     return (
-      <div>
+      <div className="sticky-body">
         <SelectAvatar selectAvatar={ this.selectAvatar }></SelectAvatar>
         <InputItem placeholder="请输入求职岗位" onChange={ val => this.handleChange('post', val) }>求职岗位</InputItem>
         <TextareaItem placeholder="请输入个人简介" title="个人简介" rows={3} onChange={ val => this.handleChange('info', val) }></TextareaItem>

@@ -15,7 +15,7 @@ class BossList extends Component {
 
   render() {
     return (
-      <div>
+      <div className="sticky-body">
         <DataList dataList={ this.state.userList }></DataList>
       </div>
     );
