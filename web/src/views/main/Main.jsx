@@ -122,6 +122,7 @@ class Main extends Component {
     socket._callbacks.$receiveMsg = []
     socket.on('receiveMsg', data => {
       this.props.messageAction()
+      this.$http.put('rest/readmsg', {from: localStorage.to})
     })
   }
 

@@ -109,6 +109,7 @@ class Chat extends Component {
     // socket.on('receiveMsg', data => {
     //   console.log('222')
     // })
+    this.$http.put('rest/readmsg', {from: this.state.to})
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {

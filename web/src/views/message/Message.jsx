@@ -39,8 +39,10 @@ class Message extends Component {
       groupMsgs[item.chat_id] = groupMsgs[item.chat_id] || []
       groupMsgs[item.chat_id].push(item)
     })
-    // 将分组数据转换为数组
-    let chatLists = Object.values(groupMsgs)
+    // 将分组数据转换为数组，排序将最新的消息展示在上方
+    let chatLists = Object.values(groupMsgs).sort((a, b) => {
+      return b[b.length-1].create_time - a[a.length-1].create_time
+    })
     return (
       <div className="sticky-body">
           {
