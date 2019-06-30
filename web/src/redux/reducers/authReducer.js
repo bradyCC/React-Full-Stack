@@ -1,10 +1,10 @@
 /**
  * Created by brady on 2019/6/25.
  */
-import { LOGIN, LOGOUT } from "../actionTypes"
+import { LOGIN } from "../actionTypes"
 
 const defaultState = {
-  info: []
+  userInfo: [],
 }
 
 export const authReducer = (state = defaultState, action) => {
@@ -12,12 +12,7 @@ export const authReducer = (state = defaultState, action) => {
     case LOGIN:
       return {
         ...state,
-        info: action.payload
-      }
-    case LOGOUT:
-      return {
-        ...state,
-        info: []
+        userInfo: action.payload,
       }
     default:
       return state

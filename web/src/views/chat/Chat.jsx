@@ -6,10 +6,12 @@ import React, {Component} from 'react'
 import { WhiteSpace, List, InputItem } from 'antd-mobile'
 import './chat.less'
 import { validata } from '../../utils/validata'
-import initIO from '../../utils/initIO'
-
 import { connect } from 'react-redux'
 import { messageAction } from '../../redux/actions/messageAction'
+import io from 'socket.io-client'
+
+const socket = io('http://localhost:3000')
+
 
 // 关联
 const mapStateToProps = state => ({
@@ -19,7 +21,6 @@ const mapStateToProps = state => ({
 
 // 装饰器
 @connect(mapStateToProps, { messageAction: messageAction })
-
 class Chat extends Component {
   constructor(props) {
     super(props)
@@ -38,6 +39,7 @@ class Chat extends Component {
     })
   }
 
+  // 发送消息
   handleSend = () => {
     // 验证
     let validataArr = [
@@ -45,10 +47,7 @@ class Chat extends Component {
     ]
     if (!validata(validataArr)) return false
 
-    initIO(this.state)
-
-    // 发送成功，清空内容
-    this.setState({ content: `` })
+    socket.emit('sendMsg', this.state)
   }
 
   render() {
@@ -88,13 +87,15 @@ class Chat extends Component {
   }
 
   componentDidMount() {
-    this.props.messageAction()
+    socket.on('receiveMsg', data => {
+      this.setState({
+        content: ``
+      })
+      this.props.messageAction()
+    })
   }
 
-  // 离开时，删除localStorage
-  componentWillUnmount() {
-    delete localStorage.to
-    delete localStorage.title
+  componentWillReceiveProps(nextProps, nextContext) {
   }
 }
 

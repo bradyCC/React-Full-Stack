@@ -1,46 +1,44 @@
 /**
  * Created by brady on 2019/6/25.
  */
-import { LOGIN } from "../actionTypes"
 import http from '../../utils/http'
 import { createHashHistory } from 'history' // 如果是hash路由
 import { Toast } from 'antd-mobile'
 
-export let authAction = (type = LOGIN, data) => {
-  return (dispatch) => {
-    http.post('login', data).then(data => {
-      dispatch({ type: type, payload: data.data })
-      Toast.success(data.data.message, 2, () => {
-        localStorage.token = data.data.token
-        // 首次登陆，跳转到完善资料
-        if (!data.data.header) {
-          switch (data.data.type) {
-            case '1':
-              createHashHistory().push('/bossinfo')
-              break
-            case '2':
-              createHashHistory().push('/userinfo')
-              break
-            default:
-              break
-          }
-        // 完善资料后，再次登陆，跳转到对应列表页
-        } else {
-          localStorage.id = data.data.id
-          localStorage.type = data.data.type
-          localStorage.avatar = data.data.header
-          switch (data.data.type) {
-            case '1':
-              createHashHistory().push('/userlist')
-              break
-            case '2':
-              createHashHistory().push('/bosslist')
-              break
-            default:
-              break
-          }
+export let authAction = (type, data) => {
+  return async (dispatch) => {
+    let res = await http.post('login', data)
+    dispatch({ type: type, payload: res.data.user })
+    Toast.success(res.data.message, 2, () => {
+      localStorage.token = res.data.token
+      // 首次登陆，跳转到完善资料
+      if (!res.data.user.header) {
+        switch (res.data.user.type) {
+          case '1':
+            createHashHistory().push('/bossinfo')
+            break
+          case '2':
+            createHashHistory().push('/userinfo')
+            break
+          default:
+            break
         }
-      })
+        // 完善资料后，再次登陆，跳转到对应列表页
+      } else {
+        localStorage.id = res.data.user._id
+        localStorage.type = res.data.user.type
+        localStorage.avatar = res.data.user.header
+        switch (res.data.user.type) {
+          case '1':
+            createHashHistory().push('/userlist')
+            break
+          case '2':
+            createHashHistory().push('/bosslist')
+            break
+          default:
+            break
+        }
+      }
     })
   }
 }

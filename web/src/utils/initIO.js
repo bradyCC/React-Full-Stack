@@ -2,7 +2,6 @@
  * Created by brady on 2019/6/28.
  */
 import io from 'socket.io-client'
-import { Toast } from 'antd-mobile'
 
 const initIO = (sendData) => {
   // 连接服务器，获取socket对象

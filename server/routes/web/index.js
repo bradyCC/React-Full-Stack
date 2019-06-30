@@ -68,6 +68,8 @@ module.exports = () => {
 
   // 指定消息为已读
   router.put('/readmsg', async (req, res) => {
+    console.log(req.body.from)
+    console.log(req.user._id)
     const from = req.body.from;
     const to = req.user._id;
     await Chat.update({from, to, read: false}, {read: true}, {multi: true}, (err,data) => {

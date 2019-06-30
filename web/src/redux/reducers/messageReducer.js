@@ -5,7 +5,8 @@ import { MESSAGE_LIST } from "../actionTypes"
 
 const defaultState = {
   users: {},
-  chatMsgs: []
+  chatMsgs: [],
+  unread: 0
 }
 
 export const messageReducer = (state = defaultState, action) => {
@@ -14,7 +15,8 @@ export const messageReducer = (state = defaultState, action) => {
       return {
         ...state,
         users: action.payload.users,
-        chatMsgs: action.payload.chatMsgs
+        chatMsgs: action.payload.chatMsgs,
+        unread: action.payload.chatMsgs.filter(item => item.from!== localStorage.id && !item.read).length
       }
     default:
       return state

@@ -12,7 +12,7 @@ import { authAction } from '../../redux/actions/authAction'
 
 // 关联
 const mapStateToProps = state => ({
-  info: state.authReducer.info
+  userInfo: state.authReducer.userInfo
 })
 
 // 装饰器
@@ -44,21 +44,6 @@ class Login extends Component {
     if (!validata(validataArr)) return false
 
     this.props.authAction('LOGIN', this.state)
-
-    // // 开启遮罩
-    // Toast.loading('登录中', 0)
-    // // 提交数据
-    // this.$http.post('login', this.state)
-    //   .then(res => {
-    //   // 关闭遮罩
-    //   Toast.hide()
-    //   if (res.data.code === 0) {
-    //     Toast.success('登录成功', 3, () => {
-    //       localStorage.token = res.data.token
-    //       this.props.history.push('/main')
-    //     })
-    //   }
-    // })
   }
 
   // 已有账户，跳转至注册页

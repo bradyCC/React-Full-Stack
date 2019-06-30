@@ -4,11 +4,9 @@
 import { MESSAGE_LIST } from "../actionTypes"
 import http from '../../utils/http'
 
-export let messageAction = () => {
-  return (dispatch) => {
-    http.get('rest/messageList')
-      .then(data => {
-      dispatch({ type: MESSAGE_LIST, payload: data.data.data })
-    })
+export let messageAction = (type = MESSAGE_LIST) => {
+  return async (dispatch) => {
+    let res = await http.get('rest/messageList')
+    dispatch({ type: type, payload: res.data.data })
   }
 }

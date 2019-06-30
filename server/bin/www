@@ -20,7 +20,6 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-// require('../socketIO/index')(server) // 测试socket
 require('../socketIO/serverIO')(server)
 
 /**

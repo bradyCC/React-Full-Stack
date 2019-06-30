@@ -16,6 +16,16 @@ import Chat from '../chat/Chat'
 
 import Footer from '../../components/footer/Footer'
 
+import { connect } from 'react-redux'
+import { messageAction } from '../../redux/actions/messageAction'
+
+// 关联
+const mapStateToProps = state => ({
+  unread: state.messageReducer.unread,
+})
+
+// 装饰器
+@connect(mapStateToProps, { messageAction: messageAction })
 class Main extends Component {
   constructor(props) {
     super(props)
@@ -29,7 +39,6 @@ class Main extends Component {
     this.state = {
       title: ``, // 标题
       flag: false, // 控制goBack、Footer显示
-      badge: false
     }
   }
 
@@ -82,29 +91,15 @@ class Main extends Component {
     localStorage.type === '1'? this.footerList[0].state = false: this.footerList[1].state = false
   }
 
-  // 动态设置未读消息、消息详情
-  getMessageList = () => {
-    this.$http.get('rest/messageList').then(res => {
-      // 设置未读消息
-      this.footerList[2].badge = res.data.data.chatMsgs.filter(item => item.to === localStorage.id && item.read === false).length
-      // 设置消息详情
-      let users = res.data.data.users
-      for (let i in users) {
-        users[i].header = `avatar${users[i].header.replace(/[^0-9]/ig, "")}`
-      }
-      localStorage.users = JSON.stringify(users)
-      localStorage.chatMsgs = JSON.stringify(res.data.data.chatMsgs)
-      this.setState({badge: true})
-    })
-  }
-
   componentWillMount() {
     this.checkData(this.props)
     this.setTitle(this.props)
-    // this.getMessageList()
+    this.props.messageAction()
   }
 
   render() {
+    let { unread } = this.props
+    this.footerList[2].badge = unread
     return (
       <div>
         <NavBar icon={ this.state.flag? <Icon type="left" />: '' } onLeftClick={ () => this.goBack() } style={{ position: 'sticky', top: 0, zIndex: '2' }}>{ this.state.title }</NavBar>
@@ -126,7 +121,7 @@ class Main extends Component {
   componentWillReceiveProps(nextProps, nextContext) {
     this.checkData(nextProps)
     this.setTitle(nextProps)
-    // this.getMessageList()
+    this.props.messageAction()
   }
 }
 
