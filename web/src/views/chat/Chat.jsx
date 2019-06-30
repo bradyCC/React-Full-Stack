@@ -16,7 +16,6 @@ const socket = io('http://localhost:3000')
 const mapStateToProps = state => ({
   users: state.messageReducer.users,
   chatMsgs: state.messageReducer.chatMsgs,
-  unread: state.messageReducer.unread
 })
 
 // 装饰器
@@ -115,6 +114,11 @@ class Chat extends Component {
   componentDidUpdate(prevProps, prevState, snapshot) {
     // 更新显示列表
     window.scrollTo(0, document.body.scrollHeight)
+  }
+
+  componentWillUnmount() {
+    delete localStorage.title
+    delete localStorage.to
   }
 
 }

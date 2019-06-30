@@ -51,15 +51,6 @@ class Login extends Component {
     this.props.history.replace('/register')
   }
 
-  // 清空token，用于处理权限
-  componentWillMount() {
-    localStorage.clear()
-    // delete localStorage.id
-    // delete localStorage.token
-    // delete localStorage.type
-    // delete localStorage.avatar
-  }
-
   render() {
     return (
       <div>
@@ -77,6 +68,15 @@ class Login extends Component {
         </WingBlank>
       </div>
     );
+  }
+
+  // 清空token，用于处理权限
+  componentDidMount() {
+    localStorage.clear()
+    // delete localStorage.id
+    // delete localStorage.token
+    // delete localStorage.type
+    // delete localStorage.avatar
   }
 }
 

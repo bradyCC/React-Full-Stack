@@ -94,16 +94,6 @@ class Main extends Component {
     localStorage.type === '1'? this.footerList[0].state = false: this.footerList[1].state = false
   }
 
-  componentWillMount() {
-    this.checkData(this.props)
-    this.setTitle(this.props)
-    this.props.messageAction()
-    socket._callbacks.$receiveMsg = []
-    socket.on('receiveMsg', data => {
-      this.props.messageAction()
-    })
-  }
-
   render() {
     let { unread } = this.props
     this.footerList[2].badge = unread
@@ -123,6 +113,16 @@ class Main extends Component {
         { this.state.flag? '': <Footer footerList={ this.footerList }></Footer>}
       </div>
     );
+  }
+
+  componentDidMount() {
+    this.checkData(this.props)
+    this.setTitle(this.props)
+    this.props.messageAction()
+    socket._callbacks.$receiveMsg = []
+    socket.on('receiveMsg', data => {
+      this.props.messageAction()
+    })
   }
 
   componentWillReceiveProps(nextProps, nextContext) {

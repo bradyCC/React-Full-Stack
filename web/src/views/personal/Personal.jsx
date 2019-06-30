@@ -3,7 +3,7 @@
  */
 
 import React, { Component } from 'react'
-import { WhiteSpace, Modal, Result, List, Button } from 'antd-mobile'
+import { WingBlank, WhiteSpace, Modal, Result, List, Button } from 'antd-mobile'
 import './personal.less'
 
 class Personal extends Component {
@@ -35,9 +35,9 @@ class Personal extends Component {
         </List>
         <WhiteSpace></WhiteSpace>
         <WhiteSpace></WhiteSpace>
-        <List>
+        <WingBlank>
           <Button type="warning" onClick={ () => this.Logout() }>退出</Button>
-        </List>
+        </WingBlank>
       </div>
     );
   }
