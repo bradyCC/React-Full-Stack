@@ -12,9 +12,9 @@ const initIO = (sendData) => {
   console.log('客户端向服务器发送的消息：', sendData)
 
   // 向所有连接上的客户端发送消息
-  io.socket.once('receiveMsg', data => {
+  io.socket.on('receiveMsg', data => {
     console.log('客户端接收服务器发送的消息：', data)
-    Toast.success(data.message)
+    // Toast.success(data.message)
   })
 }
 

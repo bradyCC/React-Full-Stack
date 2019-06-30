@@ -121,7 +121,6 @@ class Main extends Component {
   componentWillReceiveProps(nextProps, nextContext) {
     this.checkData(nextProps)
     this.setTitle(nextProps)
-    this.props.messageAction()
   }
 }
 

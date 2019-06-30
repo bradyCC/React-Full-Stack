@@ -8,15 +8,15 @@ import './chat.less'
 import { validata } from '../../utils/validata'
 import { connect } from 'react-redux'
 import { messageAction } from '../../redux/actions/messageAction'
+
 import io from 'socket.io-client'
-
 const socket = io('http://localhost:3000')
-
 
 // 关联
 const mapStateToProps = state => ({
   users: state.messageReducer.users,
-  chatMsgs: state.messageReducer.chatMsgs
+  chatMsgs: state.messageReducer.chatMsgs,
+  unread: state.messageReducer.unread
 })
 
 // 装饰器
@@ -24,6 +24,7 @@ const mapStateToProps = state => ({
 class Chat extends Component {
   constructor(props) {
     super(props)
+    this.socket = {}
     this.state = {
       from: localStorage.id,
       to: localStorage.to,
@@ -48,6 +49,14 @@ class Chat extends Component {
     if (!validata(validataArr)) return false
 
     socket.emit('sendMsg', this.state)
+    this.setState({ content: `` })
+  }
+
+  componentWillMount() {
+    socket._callbacks.$receiveMsg = []
+    socket.on('receiveMsg', data => {
+      this.props.messageAction()
+    })
   }
 
   render() {
@@ -84,18 +93,6 @@ class Chat extends Component {
         </div>
       </div>
     )
-  }
-
-  componentDidMount() {
-    socket.on('receiveMsg', data => {
-      this.setState({
-        content: ``
-      })
-      this.props.messageAction()
-    })
-  }
-
-  componentWillReceiveProps(nextProps, nextContext) {
   }
 }
 
