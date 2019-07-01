@@ -11,7 +11,7 @@ import { messageAction } from '../../redux/actions/messageAction'
 import QueueAnim from 'rc-queue-anim'
 
 import io from 'socket.io-client'
-const socket = io('ws://localhost:3000')
+const socket = io('http://192.168.1.119:3000')
 
 // 关联
 const mapStateToProps = state => ({
