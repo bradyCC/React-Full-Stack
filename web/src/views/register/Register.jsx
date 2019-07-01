@@ -56,7 +56,7 @@ class Register extends Component {
   render() {
     const { type } = this.state
     return (
-      <div>
+      <div style={{ paddingBottom: '155px' }}>
         <NavBar>直聘App</NavBar>
         <Logo></Logo>
         <WingBlank>
