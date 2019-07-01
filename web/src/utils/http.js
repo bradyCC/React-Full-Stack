@@ -31,10 +31,13 @@ http.interceptors.response.use(res => {
   }
   return res
 },err => {
-  if (err.response.status === 401 || err.response.data.code === 3600) {
-    createHashHistory().push('/login')
+  alert(JSON.stringify(err))
+  if (err.response) {
+    if (err.response.status === 401 || err.response.status === 422 || err.response.data.code === 3600) {
+      createHashHistory().push('/login')
+    }
+    Toast.fail(err.response.data.message)
   }
-  Toast.fail(err.response.data.message)
   return Promise.reject(err)
 })
 
