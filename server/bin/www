@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+const os = require('os')
+
 /**
  * Module dependencies.
  */
@@ -82,9 +84,29 @@ function onError(error) {
  * Event listener for HTTP server "listening" event.
  */
 
+
+function getIPAdress() {
+  let localIPAddress = "";
+  let interfaces = os.networkInterfaces();
+  for (let devName in interfaces) {
+    let iface = interfaces[devName];
+    for (let i = 0; i < iface.length; i++) {
+      let alias = iface[i];
+      if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal) {
+        localIPAddress = alias.address;
+        console.log(localIPAddress);
+      }
+      if (localIPAddress) break
+    }
+  }
+  return localIPAddress;
+}
+
 function onListening() {
-  //var addr = server.address();
-  var addr = '192.168.1.119'
+  // var addr = server.address();
+  // console.log(server.address())
+  var addr = getIPAdress(); // 获取本地IP
+  console.log(addr);
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
