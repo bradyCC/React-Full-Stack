@@ -3,7 +3,7 @@
  */
 
 import React, { Component } from 'react'
-import { WhiteSpace, InputItem, TextareaItem, Button, Toast } from 'antd-mobile'
+import { WingBlank, WhiteSpace, InputItem, TextareaItem, Button, Toast } from 'antd-mobile'
 import SelectAvatar from '../../components/selectavatar/SelectAvatar'
 import { validata } from "../../utils/validata";
 
@@ -65,7 +65,9 @@ class BossInfo extends Component {
         <InputItem placeholder="请输入职位薪资" onChange={ val => this.handleChange('salary', val) }>职位薪资</InputItem>
         <TextareaItem placeholder="请输入职位要求" title="职位要求" rows={3} onChange={ val => this.handleChange('info', val) }></TextareaItem>
         <WhiteSpace></WhiteSpace>
-        <Button type="primary" onClick={ this.submit }>保存</Button>
+        <WingBlank>
+          <Button type="primary" onClick={ this.submit }>保存</Button>
+        </WingBlank>
       </div>
     );
   }
