@@ -70,6 +70,10 @@ class Message extends Component {
     );
   }
 
+  componentDidMount() {
+    this.props.messageAction()
+  }
+
 }
 
 export default withRouter(Message)

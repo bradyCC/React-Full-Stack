@@ -57,9 +57,11 @@ class Main extends Component {
         break
       case 'bosslist':
         this.setState({ title: 'Boss列表', flag: false })
+        this.props.messageAction()
         break
       case 'userlist':
         this.setState({ title: '用户列表', flag: false })
+        this.props.messageAction()
         break
       case 'message':
         this.setState({ title: '消息', flag: false })
@@ -118,7 +120,7 @@ class Main extends Component {
   componentDidMount() {
     this.checkData(this.props)
     this.setTitle(this.props)
-    this.props.messageAction()
+    // this.props.messageAction()
     socket._callbacks.$receiveMsg = []
     socket.on('receiveMsg', data => {
       this.props.messageAction()
