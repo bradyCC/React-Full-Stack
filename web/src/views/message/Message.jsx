@@ -7,6 +7,7 @@ import { List, Badge } from 'antd-mobile'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { messageAction } from '../../redux/actions/messageAction'
+import QueueAnim from 'rc-queue-anim'
 
 // 关联
 const mapStateToProps = state => ({
@@ -45,6 +46,7 @@ class Message extends Component {
     })
     return (
       <div className="sticky-body">
+        <QueueAnim type="left" delay={100}>
           {
             chatLists.map(item => {
               // 统计每组未读信息条数
@@ -63,6 +65,7 @@ class Message extends Component {
               )
             })
           }
+        </QueueAnim>
       </div>
     );
   }

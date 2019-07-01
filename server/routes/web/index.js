@@ -72,7 +72,7 @@ module.exports = () => {
     console.log(req.user._id)
     const from = req.body.from;
     const to = req.user._id;
-    await Chat.update({from, to, read: false}, {read: true}, {multi: true}, (err,data) => {
+    await Chat.updateMany({from, to, read: false}, {read: true}, {multi: true}, (err,data) => {
       res.send({
         code: 0,
         message: '修改成功',

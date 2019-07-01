@@ -20,7 +20,7 @@ import { connect } from 'react-redux'
 import { messageAction } from '../../redux/actions/messageAction'
 
 import io from 'socket.io-client'
-const socket = io('http://localhost:3000')
+const socket = io('ws://localhost:3000')
 
 // 关联
 const mapStateToProps = state => ({

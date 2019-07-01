@@ -8,9 +8,10 @@ import './chat.less'
 import { validata } from '../../utils/validata'
 import { connect } from 'react-redux'
 import { messageAction } from '../../redux/actions/messageAction'
+import QueueAnim from 'rc-queue-anim'
 
 import io from 'socket.io-client'
-const socket = io('http://localhost:3000')
+const socket = io('ws://localhost:3000')
 
 // 关联
 const mapStateToProps = state => ({
@@ -76,23 +77,25 @@ class Chat extends Component {
     return (
       <div id="chat-page" className="sticky-body">
         <List>
-          {
-            chatMsgs.map(item => {
-              let content
-              if (item.from === this.state.from && item.to === this.state.to) {
-                content = (
-                  <List.Item key={ item._id } thumb={ require(`../../assets/images/avatars/${fromHeader}.jpg`) }  wrap="true">{ item.content }</List.Item>
-                )
-              } else if (item.from === this.state.to && item.to === this.state.from) {
-                content = (
-                  <List.Item className="chat-me" key={ item._id } extra={ <img src={ require(`../../assets/images/avatars/${toHeader}.jpg`) } alt="" wrap="true" /> }>{ item.content }</List.Item>
+          <QueueAnim type="scale" delay={100}>
+            {
+              chatMsgs.map(item => {
+                let content
+                if (item.from === this.state.from && item.to === this.state.to) {
+                  content = (
+                    <List.Item key={ item._id } thumb={ require(`../../assets/images/avatars/${fromHeader}.jpg`) }  wrap="true">{ item.content }</List.Item>
                   )
-              }
-              return (
-                content
-              )
-            })
-          }
+                } else if (item.from === this.state.to && item.to === this.state.from) {
+                  content = (
+                    <List.Item className="chat-me" key={ item._id } extra={ <img src={ require(`../../assets/images/avatars/${toHeader}.jpg`) } alt="" wrap="true" /> }>{ item.content }</List.Item>
+                  )
+                }
+                return (
+                  content
+                )
+              })
+            }
+          </QueueAnim>
         </List>
         <WhiteSpace></WhiteSpace>
         <div className="send-message">
