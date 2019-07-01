@@ -106,7 +106,7 @@ function onListening() {
   // var addr = server.address();
   // console.log(server.address())
   var addr = getIPAdress(); // 获取本地IP
-  // console.log(addr);
+  console.log(addr);
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;

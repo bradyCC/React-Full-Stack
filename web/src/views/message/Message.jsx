@@ -46,7 +46,7 @@ class Message extends Component {
     })
     return (
       <div className="sticky-body">
-        <QueueAnim type="left" delay={100}>
+        <QueueAnim type="left" delay={200}>
           {
             chatLists.map(item => {
               // 统计每组未读信息条数

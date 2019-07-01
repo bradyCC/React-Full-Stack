@@ -7,7 +7,8 @@ import { Toast } from 'antd-mobile'
 
 const http = axios.create({
   // baseURL: 'http://localhost:3000/web/api/',
-  baseURL: 'http://192.168.1.119:3000/web/api/'
+  // baseURL: 'http://192.168.1.119:3000/web/api/',
+  baseURL: 'http://192.168.1.101:3000/web/api/'
 })
 
 // axios 请求头

@@ -11,7 +11,8 @@ import { messageAction } from '../../redux/actions/messageAction'
 import QueueAnim from 'rc-queue-anim'
 
 import io from 'socket.io-client'
-const socket = io('http://192.168.1.119:3000')
+// const socket = io('http://192.168.1.119:3000')
+const socket = io('http://192.168.1.101:3000')
 
 // 关联
 const mapStateToProps = state => ({
@@ -77,7 +78,7 @@ class Chat extends Component {
     return (
       <div id="chat-page" className="sticky-body">
         <List>
-          <QueueAnim type="scale" delay={100}>
+          <QueueAnim type="scale" delay={100} onEnd={ () => window.scrollTo(0, document.body.scrollHeight)}>
             {
               chatMsgs.map(item => {
                 let content
@@ -117,7 +118,7 @@ class Chat extends Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     // 更新显示列表
-    window.scrollTo(0, document.body.scrollHeight)
+    // window.scrollTo(0, document.body.scrollHeight)
   }
 
   componentWillUnmount() {
