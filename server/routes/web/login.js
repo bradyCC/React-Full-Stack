@@ -25,6 +25,7 @@ module.exports = () => {
     // 3.返回token
     const jwt = require('jsonwebtoken');
     const token = jwt.sign({ id: user._id }, req.app.get('secret'));
+    console.log('111')
     res.send({
       code: 0,
       message: '登录成功',

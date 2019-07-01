@@ -6,7 +6,8 @@ import axios from 'axios'
 import { Toast } from 'antd-mobile'
 
 const http = axios.create({
-  baseURL: 'http://localhost:3000/web/api/'
+  // baseURL: 'http://localhost:3000/web/api/',
+  baseURL: 'http://192.168.1.119:3000/web/api/'
 })
 
 // axios 请求头
@@ -31,14 +32,13 @@ http.interceptors.response.use(res => {
   }
   return res
 },err => {
-
   if (err.response) {
     if (err.response.status === 401 || err.response.status === 422 || err.response.data.code === 3600) {
       createHashHistory().push('/login')
     }
     Toast.fail(err.response.data.message)
   } else {
-    alert(JSON.stringify(err))
+    // alert(JSON.stringify(err))
   }
   return Promise.reject(err)
 })
