@@ -78,7 +78,7 @@ class Chat extends Component {
     return (
       <div id="chat-page" className="sticky-body">
         <List>
-          <QueueAnim type="scale" delay={100} onEnd={ () => window.scrollTo(0, document.body.scrollHeight)}>
+          <QueueAnim type="alpha" delay={200} onEnd={ () => window.scrollTo(0, document.body.scrollHeight)}>
             {
               chatMsgs.map(item => {
                 let content

@@ -75,6 +75,7 @@ class Main extends Component {
         break
       default:
         this.setState({ title: '首页', flag: false })
+        localStorage.type === '1'? props.history.push('/userlist'): props.history.push('/bosslist')
         break
     }
   }

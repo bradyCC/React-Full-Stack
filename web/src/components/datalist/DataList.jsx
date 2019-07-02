@@ -29,7 +29,7 @@ class DataList extends Component {
     })
     return (
       <div style={{ marginBottom: '50px' }}>
-        <QueueAnim type="scale" delay={100}>
+        <QueueAnim type="scale" delay={200}>
           {
             dataList.map(item => {
               let content
