@@ -50,7 +50,6 @@ class BossInfo extends Component {
         Toast.success(res.data.message, 2, () => {
           localStorage.id = res.data.data.id
           localStorage.type = res.data.data.type
-          localStorage.avatar = res.data.data.header
           this.props.history.push('/userlist')
         })
     })

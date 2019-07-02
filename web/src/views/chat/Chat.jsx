@@ -107,7 +107,7 @@ class Chat extends Component {
     )
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.props.messageAction()
     // socket._callbacks.$receiveMsg = []
     // socket.on('receiveMsg', data => {

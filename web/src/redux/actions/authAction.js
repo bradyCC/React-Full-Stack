@@ -27,7 +27,6 @@ export let authAction = (type, data) => {
       } else {
         localStorage.id = res.data.user._id
         localStorage.type = res.data.user.type
-        localStorage.avatar = res.data.user.header
         switch (res.data.user.type) {
           case '1':
             createHashHistory().push('/userlist')

@@ -134,6 +134,7 @@ class Main extends Component {
     this.checkData(nextProps)
     this.setTitle(nextProps)
   }
+
 }
 
 export default Main
