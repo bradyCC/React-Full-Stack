@@ -6,10 +6,7 @@ import axios from 'axios'
 import { Toast } from 'antd-mobile'
 
 const http = axios.create({
-  // baseURL: 'http://localhost:3000/web/api/', // 本地
-  // baseURL: 'http://192.168.1.119:3000/web/api/', // 公司
-  // baseURL: 'http://192.168.1.108:3000/web/api/', // 虚拟机
-  baseURL: 'http://192.168.1.101:3000/web/api', // 家
+  baseURL: `${window.Domain.IpAddress}/web/api`
 })
 
 // axios 请求头
@@ -34,6 +31,7 @@ http.interceptors.response.use(res => {
   }
   return res
 },err => {
+  console.log(window)
   if (err.response) {
     if (err.response.status === 401 || err.response.status === 422 || err.response.data.code === 3600) {
       createHashHistory().push('/login')
