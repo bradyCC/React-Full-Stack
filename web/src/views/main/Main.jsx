@@ -92,10 +92,9 @@ class Main extends Component {
       if (!localStorage.token) props.history.push('/login')
     } else {
       if (!localStorage.type) props.history.push('/login')
+      // 动态设置footer
+      localStorage.type === '1'? this.footerList[0].state = false: this.footerList[1].state = false
     }
-
-    // 动态设置footer
-    localStorage.type === '1'? this.footerList[0].state = false: this.footerList[1].state = false
   }
 
   render() {

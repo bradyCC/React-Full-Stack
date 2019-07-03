@@ -4,7 +4,7 @@
 import io from 'socket.io-client'
 
 // 连接服务器，获取socket对象
-const socket = io('http://192.168.1.119:3000')
+const socket = io('http://192.168.1.108:3000')
 
 // 客户端向服务器发送的消息
 socket.emit('sendMsg', { name: 'abc', date: Date.now() })
