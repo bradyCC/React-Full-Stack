@@ -19,7 +19,7 @@ module.exports = () => {
 
     // 2.验证密码
     // if (!password) return next(createError(422, '请输入密码'));
-    const isValid = require('bcrypt').compareSync(password, user.password);
+    const isValid = require('bcryptjs').compareSync(password, user.password);
     if (!isValid) return next(createError(422, '密码错误'));
 
     // 3.返回token

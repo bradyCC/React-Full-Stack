@@ -10,7 +10,7 @@ const schema = new mongoose.Schema({
     type: String,
     select: false, // 设置select: false 密码不查出，保存后不会更新
     set (val) {
-      return require('bcrypt').hashSync(val, 10); // 散列模式
+      return require('bcryptjs').hashSync(val, 10); // 散列模式
     }
   },
   type: { type: String }, // 用户类型

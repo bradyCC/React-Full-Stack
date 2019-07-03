@@ -20,8 +20,10 @@ import { connect } from 'react-redux'
 import { messageAction } from '../../redux/actions/messageAction'
 
 import io from 'socket.io-client'
-// const socket = io('http://192.168.1.119:3000')
-const socket = io('http://192.168.1.101:3000')
+// const socket = io('http://localhost:3000') // 本地
+// const socket = io('http://192.168.1.119:3000') // 公司
+// const socket = io('http://192.168.1.108:3000') // 虚拟机
+const socket = io('http://192.168.1.101:3000') // 家
 
 // 关联
 const mapStateToProps = state => ({

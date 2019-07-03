@@ -6,9 +6,10 @@ import axios from 'axios'
 import { Toast } from 'antd-mobile'
 
 const http = axios.create({
-  // baseURL: 'http://localhost:3000/web/api/',
-  // baseURL: 'http://192.168.1.119:3000/web/api/',
-  baseURL: 'http://192.168.1.101:3000/web/api/'
+  // baseURL: 'http://localhost:3000/web/api/', // 本地
+  // baseURL: 'http://192.168.1.119:3000/web/api/', // 公司
+  // baseURL: 'http://192.168.1.108:3000/web/api/', // 虚拟机
+  baseURL: 'http://192.168.1.101:3000/web/api', // 家
 })
 
 // axios 请求头
