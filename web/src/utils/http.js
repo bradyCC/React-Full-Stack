@@ -31,7 +31,6 @@ http.interceptors.response.use(res => {
   }
   return res
 },err => {
-  console.log(window)
   if (err.response) {
     if (err.response.status === 401 || err.response.status === 422 || err.response.data.code === 3600) {
       createHashHistory().push('/login')
